@@ -67,10 +67,10 @@
     <div class="max-w-6xl mx-auto px-4 py-3 sm:py-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         
-        <!-- Hospital Branding & System Title -->
+        <!-- Hospital Branding & System Title (Replaced Leaf with Mae Ai Hospital Logo) -->
         <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-emerald-300 shadow-inner flex-shrink-0">
-            <i data-lucide="leaf" class="w-7 h-7"></i>
+          <div class="w-12 h-12 rounded-2xl bg-white p-1 backdrop-blur-md border border-white/40 flex items-center justify-center shadow-inner flex-shrink-0 overflow-hidden shadow-emerald-950/20">
+            <img id="hospitalLogoImg" src="logo.png" alt="โลโก้โรงพยาบาลแม่อาย" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Seal_of_the_Ministry_of_Public_Health_of_Thailand.svg/240px-Seal_of_the_Ministry_of_Public_Health_of_Thailand.svg.png';">
           </div>
           <div>
             <div class="flex items-center gap-2">
@@ -109,6 +109,12 @@
           <button onclick="openScanModal()" class="inline-flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold px-3 py-1.5 rounded-lg shadow-sm transition active:scale-95">
             <i data-lucide="qr-code" class="w-4 h-4"></i>
             <span>สแกน QR หน้างาน</span>
+          </button>
+          <!-- New: System Settings & 1 Oct 2569 Reset Modal Trigger -->
+          <button onclick="openResetModal()" class="inline-flex items-center gap-1.5 bg-emerald-700/80 hover:bg-emerald-600 text-white font-medium px-3 py-1.5 rounded-lg border border-emerald-400/40 transition active:scale-95 shadow-sm">
+            <i data-lucide="settings-2" class="w-4 h-4 text-emerald-200"></i>
+            <span class="hidden sm:inline">ตั้งค่า / เริ่ม 1 ต.ค. 69</span>
+            <span class="sm:hidden">ตั้งค่า</span>
           </button>
           <button onclick="exportToCSV()" class="inline-flex items-center gap-1 bg-white/10 hover:bg-white/20 text-white px-2.5 py-1.5 rounded-lg border border-white/20 transition">
             <i data-lucide="download" class="w-4 h-4"></i>
@@ -1308,6 +1314,122 @@
     </div>
   </div>
 
+  <!-- System Settings & Data Reset Modal (1 Oct 2569 Initialization) -->
+  <div id="resetModal" class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-slate-100 flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Header -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
+            <i data-lucide="sliders" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-800 text-sm sm:text-base">จัดการระบบ & ฐานข้อมูลบันทึก</h3>
+            <p class="text-[11px] text-slate-500">เตรียมความพร้อมสำหรับเริ่มบันทึกจริง 1 ต.ค. 2569</p>
+          </div>
+        </div>
+        <button onclick="closeResetModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Body Content -->
+      <div class="overflow-y-auto custom-scroll py-4 space-y-4 text-xs">
+        
+        <!-- Status Box -->
+        <div id="systemModeBanner" class="p-3.5 rounded-2xl border flex items-center justify-between bg-amber-50 border-amber-200 text-amber-900">
+          <div>
+            <div class="font-bold text-xs flex items-center gap-1.5">
+              <i data-lucide="info" class="w-4 h-4 text-amber-600"></i>
+              สถานะปัจจุบัน: <span id="systemModeText" class="font-semibold">โหมดข้อมูลตัวอย่าง (Demo Mode)</span>
+            </div>
+            <p class="text-[11px] text-amber-700 mt-0.5">ระบบกำลังแสดงตัวเลขและกราฟจำลองเพื่อให้ทดสอบฟังก์ชัน</p>
+          </div>
+          <span id="systemModeBadge" class="text-[10px] font-bold px-2 py-1 rounded bg-amber-200 text-amber-900">DEMO</span>
+        </div>
+
+        <!-- Section 1: Reset for Production on 1 Oct 2569 -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+          <div class="font-bold text-slate-800 text-xs flex items-center gap-1.5 text-emerald-800">
+            <i data-lucide="calendar" class="w-4 h-4 text-emerald-600"></i>
+            เริ่มใช้งานจริง วันที่ 1 ตุลาคม 2569 (ปีงบประมาณ 2570)
+          </div>
+          <p class="text-[11px] text-slate-600 leading-relaxed">
+            เมื่อกดปุ่มด้านล่าง ระบบจะทำการ **ล้างข้อมูลตัวอย่างสมมุติทั้งหมด** รีเซ็ตตารางประวัติให้สะอาด และตั้งค่ามิเตอร์ให้พร้อมบันทึกตัวเลขจริงของ รพ.แม่อาย โดยข้อมูลใหม่จะถูกเซฟลงในเครื่องของท่านอย่างถาวร
+          </p>
+          <div class="flex flex-col sm:flex-row gap-2 pt-1">
+            <button onclick="resetToProduction()" class="w-full sm:w-auto flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>
+              <span>รีเซ็ตระบบ เริ่มบันทึกจริง 1 ต.ค. 69</span>
+            </button>
+            <button onclick="restoreDemoData()" class="w-full sm:w-auto bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium py-2.5 px-3 rounded-xl transition text-center">
+              คืนค่าข้อมูลตัวอย่าง
+            </button>
+          </div>
+        </div>
+
+        <!-- Section 1.5: Google Sheets Cloud Database Sync Setup -->
+        <div class="bg-emerald-50/80 p-4 rounded-2xl border border-emerald-300 space-y-2.5">
+          <div class="font-bold text-emerald-950 text-xs flex items-center gap-1.5">
+            <i data-lucide="cloud" class="w-4 h-4 text-emerald-600"></i>
+            เชื่อมต่อฐานข้อมูลกลางออนไลน์ (Google Sheets API 24 ชม.)
+          </div>
+          <p class="text-[11px] text-emerald-900 leading-relaxed">
+            ใส่ลิงก์ **Google Apps Script Web App URL** ที่ได้จาก Google Sheets เพื่อให้มือถือทุกเครื่องบันทึกข้อมูลมารวมกันที่ตารางเดียวกันแบบออนไลน์ 24 ชม.:
+          </p>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input type="url" id="googleScriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec" class="flex-1 bg-white border border-emerald-300 rounded-lg px-2.5 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono">
+            <button onclick="saveGoogleScriptUrl()" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-lg font-medium text-xs transition flex items-center justify-center gap-1.5 flex-shrink-0 shadow-sm">
+              <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> บันทึกการเชื่อมต่อ
+            </button>
+          </div>
+          <div id="cloudSyncStatus" class="text-[11px] font-medium text-slate-600 flex items-center gap-1.5 pt-0.5">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Section 2: Logo Customization Instructions -->
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2.5">
+          <div class="font-bold text-slate-800 text-xs flex items-center gap-1.5 text-sky-800">
+            <i data-lucide="image" class="w-4 h-4 text-sky-600"></i>
+            การใส่รูปโลโก้โรงพยาบาลแม่อาย (หัวเว็บ)
+          </div>
+          <p class="text-[11px] text-slate-600 leading-relaxed">
+            ท่านสามารถนำไฟล์ภาพโลโก้ รพ.แม่อาย มาตั้งชื่อว่า <code class="bg-white px-1.5 py-0.5 rounded border border-slate-300 text-sky-700 font-mono">logo.png</code> แล้วอัปโหลดใส่ไว้ในโฟลเดอร์เดียวกันบน GitHub ได้เลยครับ หรือใส่ URL ลิงก์ภาพได้ที่ช่องด้านล่างนี้:
+          </p>
+          <div class="flex gap-2">
+            <input type="text" id="customLogoInput" placeholder="URL รูปโลโก้ (เช่น https://.../logo.png)" class="flex-1 bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-emerald-500">
+            <button onclick="applyCustomLogoUrl()" class="bg-sky-600 hover:bg-sky-700 text-white px-3 py-1.5 rounded-lg font-medium text-xs transition">
+              ปรับใช้
+            </button>
+          </div>
+        </div>
+
+        <!-- Section 3: Data Storage Info -->
+        <div class="bg-emerald-50/70 p-3.5 rounded-2xl border border-emerald-100 text-slate-600 leading-relaxed space-y-1 text-[11px]">
+          <div class="font-bold text-emerald-900 text-xs flex items-center gap-1">
+            <i data-lucide="database" class="w-3.5 h-3.5 text-emerald-700"></i>
+            ข้อมูลถูกจัดเก็บไว้ที่ไหน?
+          </div>
+          <p>
+            ข้อมูลที่บันทึกผ่านหน้าเว็บจะถูกเก็บไว้ใน <strong>LocalStorage (หน่วยความจำถาวรของเบราว์เซอร์)</strong> บนอุปกรณ์เครื่องนี้โดยอัตโนมัติ โดยไม่ต้องเช่าฐานข้อมูลใดๆ และสามารถกด <strong>"ส่งออก CSV"</strong> เพื่อนำไฟล์ Excel ไปสำรองเก็บไว้ในคอมพิวเตอร์ รพ. ได้ตลอดเวลา
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+        <span class="text-[11px] text-slate-400">กลุ่มงานควบคุมโรค รพ.แม่อาย</span>
+        <button onclick="closeResetModal()" class="py-2 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition">
+          ปิดหน้าต่าง
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Notification Toast -->
   <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
     <div class="bg-slate-900/95 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-700 text-xs sm:text-sm">
@@ -1340,6 +1462,21 @@
 
     // Pump flow rate constant for wastewater inflow: 15.975 m3 per hour
     const WWTS_PUMP_FLOW_RATE = 15.975;
+
+    // Storage Keys
+    const STORAGE_KEY_HISTORY = 'maeai_env_records_v1';
+    const STORAGE_KEY_MODE = 'maeai_env_mode_is_production';
+    const STORAGE_KEY_LOGO = 'maeai_env_custom_logo';
+    const STORAGE_KEY_GAS_URL = 'maeai_env_google_script_url';
+
+    // Mock dataset for initial preview
+    const defaultMockHistory = [
+      { date: '2026-09-09', cat: 'บำบัดน้ำเสีย', point: 'บ่อสูบน้ำเสีย & บ่อเติมอากาศ', value: 'ปั๊ม 6.5 ชม. (103.8 ลบ.ม.) | DO: 2.8 | คลอรีน: 0.50 mg/L', status: 'ผ่านเกณฑ์', recorder: 'นายจิรศักดิ์ นนดี' },
+      { date: '2026-09-09', cat: 'ซ่อมบำรุง/แก้ไข', point: 'ระบบประปา - ปั๊มสูบน้ำดิบ', value: 'ปัญหา: ข้อต่อท่อรั่วซึม | แก้ไข: พันเทปและเปลี่ยนซีลยางใหม่', status: 'เสร็จสิ้น', recorder: 'นายจิรศักดิ์ นนดี' },
+      { date: '2026-09-09', cat: 'ระบบประปา', point: 'มิเตอร์ M-01 น้ำดิบ', value: 'ใช้น้ำ 142.5 ลบ.ม. (คลอรีน 0.35 mg/L)', status: 'ผ่านเกณฑ์', recorder: 'นายจิรศักดิ์ นนดี' },
+      { date: '2026-09-09', cat: 'จัดการขยะ', point: 'จุดรวมขยะ รพ.แม่อาย', value: 'ติดเชื้อ 19.4 กก., อันตราย 3.2 กก. (รวม 110.3 กก.)', status: 'จัดเก็บเรียบร้อย', recorder: 'นายจิรศักดิ์ นนดี' },
+      { date: '2026-09-08', cat: 'สิ่งแวดล้อมและความปลอดภัย', point: 'แผนกผู้ป่วยนอก (OPD)', value: 'ไม่มีอุบัติการณ์ (Zero Incident)', status: 'ปลอดภัย', recorder: 'นายจิรศักดิ์ นนดี' }
+    ];
 
     // Environmental mock trend data across 7d, 30d, and quarterly for all charts
     const dashboardData = {
@@ -1408,12 +1545,210 @@
       setDefaultDatesAndConstraints();
       updateClock();
       setInterval(updateClock, 1000);
-      loadMockHistory();
+      loadStoredLogo();
+      loadGoogleScriptUrl();
+      loadHistoryFromStorage();
       calculateWaterDiff();
       calcWasteTotal();
       initCharts();
       checkUrlParamsOnLoad(); // Check URL query for physical QR scans
     });
+
+    // Load & Save Google Apps Script Web App URL
+    function loadGoogleScriptUrl() {
+      const savedUrl = localStorage.getItem(STORAGE_KEY_GAS_URL) || '';
+      const inputEl = document.getElementById('googleScriptUrlInput');
+      const statusEl = document.getElementById('cloudSyncStatus');
+      if (inputEl) inputEl.value = savedUrl;
+
+      if (statusEl) {
+        if (savedUrl) {
+          statusEl.innerHTML = `<span class="text-emerald-700 font-bold flex items-center gap-1"><i data-lucide="check" class="w-3.5 h-3.5"></i> กำลังเชื่อมต่อกับ Google Sheets สำเร็จ</span>`;
+        } else {
+          statusEl.innerHTML = `<span class="text-amber-700 flex items-center gap-1"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> กำลังใช้ระบบบันทึกในเครื่อง (กรอก URL ด้านบนเพื่อเชื่อมต่อออนไลน์)</span>`;
+        }
+      }
+    }
+
+    function saveGoogleScriptUrl() {
+      const inputVal = document.getElementById('googleScriptUrlInput').value.trim();
+      if (inputVal) {
+        localStorage.setItem(STORAGE_KEY_GAS_URL, inputVal);
+        showToast('เชื่อมต่อฐานข้อมูล Google Sheets สำเร็จแล้วค่ะ');
+      } else {
+        localStorage.removeItem(STORAGE_KEY_GAS_URL);
+        showToast('ยกเลิกการเชื่อมต่อ Google Sheets แล้ว');
+      }
+      loadGoogleScriptUrl();
+      lucide.createIcons();
+    }
+
+    // Send Record to Google Sheets Online Database
+    function syncRecordToGoogleSheets(record) {
+      const gasUrl = localStorage.getItem(STORAGE_KEY_GAS_URL);
+      if (!gasUrl) return; // Skip if no API URL configured
+
+      fetch(gasUrl, {
+        method: 'POST',
+        mode: 'no-cors', // Google Apps Script Web App requires no-cors for simple client requests
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(record)
+      }).then(() => {
+        console.log('Record successfully dispatched to Google Sheets.');
+      }).catch(err => {
+        console.warn('Unable to sync to Google Sheets:', err);
+      });
+    }
+
+    // Load and Apply Custom Logo if stored
+    function loadStoredLogo() {
+      const savedLogo = localStorage.getItem(STORAGE_KEY_LOGO);
+      if (savedLogo) {
+        const logoEl = document.getElementById('hospitalLogoImg');
+        if (logoEl) logoEl.src = savedLogo;
+        const inputEl = document.getElementById('customLogoInput');
+        if (inputEl) inputEl.value = savedLogo;
+      }
+    }
+
+    function applyCustomLogoUrl() {
+      const inputVal = document.getElementById('customLogoInput').value.trim();
+      if (inputVal) {
+        localStorage.setItem(STORAGE_KEY_LOGO, inputVal);
+        const logoEl = document.getElementById('hospitalLogoImg');
+        if (logoEl) logoEl.src = inputVal;
+        showToast('อัปเดตโลโก้โรงพยาบาลแม่อายเรียบร้อยแล้วค่ะ');
+      } else {
+        localStorage.removeItem(STORAGE_KEY_LOGO);
+        const logoEl = document.getElementById('hospitalLogoImg');
+        if (logoEl) logoEl.src = 'logo.png';
+        showToast('รีเซ็ตเป็นค่าเริ่มต้น (logo.png) แล้วค่ะ');
+      }
+    }
+
+    // Storage Management
+    function loadHistoryFromStorage() {
+      const isProduction = localStorage.getItem(STORAGE_KEY_MODE) === 'true';
+      const stored = localStorage.getItem(STORAGE_KEY_HISTORY);
+      
+      updateSystemModeUI(isProduction);
+
+      if (stored !== null) {
+        try {
+          historyRecords = JSON.parse(stored);
+        } catch(e) {
+          historyRecords = isProduction ? [] : [...defaultMockHistory];
+        }
+      } else {
+        historyRecords = isProduction ? [] : [...defaultMockHistory];
+      }
+      renderHistoryTable();
+    }
+
+    function saveHistoryToStorage() {
+      localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(historyRecords));
+    }
+
+    function updateSystemModeUI(isProduction) {
+      const banner = document.getElementById('systemModeBanner');
+      const text = document.getElementById('systemModeText');
+      const badge = document.getElementById('systemModeBadge');
+      if (!banner || !text || !badge) return;
+
+      if (isProduction) {
+        banner.className = "p-3.5 rounded-2xl border flex items-center justify-between bg-emerald-50 border-emerald-200 text-emerald-900";
+        text.innerText = "โหมดใช้งานจริง (Production - เริ่ม 1 ต.ค. 69)";
+        badge.className = "text-[10px] font-bold px-2 py-1 rounded bg-emerald-200 text-emerald-900";
+        badge.innerText = "PRODUCTION";
+      } else {
+        banner.className = "p-3.5 rounded-2xl border flex items-center justify-between bg-amber-50 border-amber-200 text-amber-900";
+        text.innerText = "โหมดข้อมูลตัวอย่าง (Demo Mode)";
+        badge.className = "text-[10px] font-bold px-2 py-1 rounded bg-amber-200 text-amber-900";
+        badge.innerText = "DEMO";
+      }
+      lucide.createIcons();
+    }
+
+    // Reset to Production mode (Clean zero state for 1 Oct 2569)
+    function resetToProduction() {
+      localStorage.setItem(STORAGE_KEY_MODE, 'true');
+      historyRecords = [];
+      saveHistoryToStorage();
+      renderHistoryTable();
+      updateSystemModeUI(true);
+
+      // Reset KPIs to blank/initial
+      document.getElementById('kpiWater').innerText = "0.0";
+      document.getElementById('kpiWwtsInflow').innerText = "0.0";
+      document.getElementById('kpiWwtsHours').innerText = "0.0";
+      document.getElementById('kpiChlorine').innerText = "0.00";
+      document.getElementById('kpiInfectious').innerText = "0.0";
+      document.getElementById('kpiAccident').innerText = "0";
+
+      // Reset Chart Data to clean baseline
+      if (chartWater) {
+        chartWater.data.datasets[0].data = [0, 0, 0, 0, 0, 0, 0];
+        chartWater.update();
+      }
+      if (chartWaste) {
+        chartWaste.data.datasets[0].data = [0, 0, 0, 0, 0];
+        chartWaste.update();
+      }
+      if (chartWwts) {
+        chartWwts.data.datasets[0].data = [0, 0, 0, 0, 0, 0, 0];
+        chartWwts.data.datasets[1].data = [0, 0, 0, 0, 0, 0, 0];
+        chartWwts.data.datasets[3].data = [0, 0, 0, 0, 0, 0, 0];
+        chartWwts.update();
+      }
+
+      closeResetModal();
+      showToast('🎉 รีเซ็ตระบบพร้อมเริ่มบันทึกจริง 1 ต.ค. 2569 เรียบร้อยแล้วค่ะ');
+    }
+
+    // Restore Demo data anytime for system testing
+    function restoreDemoData() {
+      localStorage.setItem(STORAGE_KEY_MODE, 'false');
+      historyRecords = [...defaultMockHistory];
+      saveHistoryToStorage();
+      renderHistoryTable();
+      updateSystemModeUI(false);
+
+      // Restore KPIs
+      document.getElementById('kpiWater').innerText = "142.5";
+      document.getElementById('kpiWwtsInflow').innerText = "103.8";
+      document.getElementById('kpiWwtsHours').innerText = "6.5";
+      document.getElementById('kpiChlorine').innerText = "0.35";
+      document.getElementById('kpiInfectious').innerText = "19.4";
+      document.getElementById('kpiAccident').innerText = "0";
+
+      if (chartWater) {
+        chartWater.data.datasets[0].data = dashboardData.water['7d'].data;
+        chartWater.update();
+      }
+      if (chartWaste) {
+        chartWaste.data.datasets[0].data = dashboardData.waste['7d'];
+        chartWaste.update();
+      }
+      if (chartWwts) {
+        chartWwts.data.datasets[0].data = dashboardData.wwts['7d'].inflow;
+        chartWwts.data.datasets[1].data = dashboardData.wwts['7d'].do;
+        chartWwts.data.datasets[3].data = dashboardData.wwts['7d'].chlorine;
+        chartWwts.update();
+      }
+
+      closeResetModal();
+      showToast('คืนค่าข้อมูลตัวอย่าง (Demo Data) สำหรับทดสอบระบบเรียบร้อยค่ะ');
+    }
+
+    function openResetModal() {
+      document.getElementById('resetModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+    function closeResetModal() {
+      document.getElementById('resetModal').classList.add('hidden');
+    }
 
     function updateClock() {
       const now = new Date();
@@ -2152,21 +2487,23 @@
 
     let historyRecords = [];
 
-    function loadMockHistory() {
-      historyRecords = [
-        { date: '2026-09-09', cat: 'บำบัดน้ำเสีย', point: 'บ่อสูบน้ำเสีย & บ่อเติมอากาศ', value: 'ปั๊ม 6.5 ชม. (103.8 ลบ.ม.) | DO: 2.8 | คลอรีน: 0.50 mg/L', status: 'ผ่านเกณฑ์', recorder: 'นายจิรศักดิ์ นนดี' },
-        { date: '2026-09-09', cat: 'ซ่อมบำรุง/แก้ไข', point: 'ระบบประปา - ปั๊มสูบน้ำดิบ', value: 'ปัญหา: ข้อต่อท่อรั่วซึม | แก้ไข: พันเทปและเปลี่ยนซีลยางใหม่', status: 'เสร็จสิ้น', recorder: 'นายจิรศักดิ์ นนดี' },
-        { date: '2026-09-09', cat: 'ระบบประปา', point: 'มิเตอร์ M-01 น้ำดิบ', value: 'ใช้น้ำ 142.5 ลบ.ม. (คลอรีน 0.35 mg/L)', status: 'ผ่านเกณฑ์', recorder: 'นายจิรศักดิ์ นนดี' },
-        { date: '2026-09-09', cat: 'จัดการขยะ', point: 'จุดรวมขยะ รพ.แม่อาย', value: 'ติดเชื้อ 19.4 กก., อันตราย 3.2 กก. (รวม 110.3 กก.)', status: 'จัดเก็บเรียบร้อย', recorder: 'นายจิรศักดิ์ นนดี' },
-        { date: '2026-09-08', cat: 'สิ่งแวดล้อมและความปลอดภัย', point: 'แผนกผู้ป่วยนอก (OPD)', value: 'ไม่มีอุบัติการณ์ (Zero Incident)', status: 'ปลอดภัย', recorder: 'นายจิรศักดิ์ นนดี' }
-      ];
-      renderHistoryTable();
-    }
-
     function renderHistoryTable() {
       const tbody = document.getElementById('historyTableBody');
       if (!tbody) return;
       tbody.innerHTML = '';
+
+      if (historyRecords.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="py-8 text-center text-slate-400">
+              <i data-lucide="clipboard-list" class="w-8 h-8 mx-auto mb-2 text-slate-300"></i>
+              <div>ยังไม่มีข้อมูลบันทึก (พร้อมเริ่มบันทึกข้อมูลรอบ 1 ต.ค. 2569)</div>
+            </td>
+          </tr>
+        `;
+        lucide.createIcons();
+        return;
+      }
 
       historyRecords.forEach(item => {
         const tr = document.createElement('tr');
@@ -2197,11 +2534,14 @@
 
     function addHistoryRow(record) {
       historyRecords.unshift(record);
+      saveHistoryToStorage();
       renderHistoryTable();
+      syncRecordToGoogleSheets(record); // Automatically sync to Google Sheets Cloud
     }
 
     function clearHistoryData() {
       historyRecords = [];
+      saveHistoryToStorage();
       renderHistoryTable();
       showToast('ล้างข้อมูลประวัติเรียบร้อยแล้ว');
     }
