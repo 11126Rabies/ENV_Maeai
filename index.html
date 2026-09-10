@@ -62,16 +62,94 @@
       .chart-container { height: 280px; }
       .chart-container-tall { height: 300px; }
     }
+
+    /* ======================================================== */
+    /* 🌿 DESIGN SYSTEM: กรอบลอยโทนสีเขียว-เขียวเข้ม (Floating Forest Card) */
+    /* ======================================================== */
+    .eco-float-card {
+      background: #ffffff;
+      /* ปรับเส้นกรอบรอบด้าน (ซ้าย ขวา ล่าง) ให้หนาขึ้นเป็น 2.5px และใช้สีเขียวเข้มคมชัด */
+      border: 2.5px solid #047857;
+      /* เส้นขอบบนหนา 6px สไตล์หัวการ์ดระดับบริหาร */
+      border-top: 6px solid #064e3b;
+      border-radius: 1.5rem;
+      box-shadow: 0 12px 28px -4px rgba(6, 78, 59, 0.18), 0 5px 14px -2px rgba(6, 78, 59, 0.12);
+      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .eco-float-card:hover {
+      border-color: #059669;
+      box-shadow: 0 20px 36px -6px rgba(6, 78, 59, 0.26), 0 10px 18px -4px rgba(6, 78, 59, 0.16);
+      transform: translateY(-3px);
+    }
+
+    /* Sub-card floating style inside tabs */
+    .eco-float-subcard {
+      background: #fcfdfd;
+      /* เพิ่มความหนาและความเข้มของขอบการ์ดย่อย */
+      border: 2px solid #047857;
+      border-left: 5px solid #064e3b;
+      border-radius: 1.15rem;
+      box-shadow: 0 5px 16px -2px rgba(6, 78, 59, 0.12);
+      transition: all 0.2s ease;
+    }
+    .eco-float-subcard:hover {
+      border-color: #10b981;
+      box-shadow: 0 8px 20px -3px rgba(6, 78, 59, 0.18);
+      transform: translateY(-1.5px);
+    }
+
+    /* ======================================================== */
+    /* 📝 HIGH-CONTRAST FORM CONTROLS: ปรับกรอบช่องกรอกข้อมูลให้คมชัด สังเกตง่าย */
+    /* ======================================================== */
+    input:not([type="checkbox"]):not([type="radio"]),
+    select,
+    textarea {
+      border-width: 2px !important;
+      border-color: #334155 !important; /* กรอบสีเข้มคมชัด สังเกตเห็นตำแหน่งกรอกได้ทันที */
+      background-color: #ffffff;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+      transition: all 0.2s ease;
+    }
+
+    /* สถานะเมื่อคลิกเลือกช่องกรอก (Focus State) */
+    input:not([type="checkbox"]):not([type="radio"]):focus,
+    select:focus,
+    textarea:focus {
+      border-color: #047857 !important;
+      outline: none !important;
+      box-shadow: 0 0 0 4px rgba(4, 120, 87, 0.32) !important;
+    }
+
+    /* ช่องอ่านอย่างเดียว (Readonly) */
+    input[readonly] {
+      background-color: #e2e8f0 !important;
+      border-color: #64748b !important;
+      border-width: 2px !important;
+      color: #0f172a !important;
+      font-weight: 600 !important;
+    }
+
+    /* ปรับความคมชัดของกรอบสีเฉพาะหมวดหมู่ ให้เข้มและหนาขึ้นเด่นชัด */
+    .border-slate-300 { border-color: #334155 !important; border-width: 2px !important; }
+    .border-slate-200 { border-color: #475569 !important; border-width: 2px !important; }
+    .border-emerald-400, .border-emerald-300 { border-color: #047857 !important; border-width: 2px !important; }
+    .border-teal-400, .border-teal-300 { border-color: #0f766e !important; border-width: 2px !important; }
+    .border-amber-400, .border-amber-300 { border-color: #b45309 !important; border-width: 2px !important; }
+    .border-rose-300, .border-rose-400 { border-color: #be123c !important; border-width: 2px !important; }
+    .border-purple-300, .border-purple-400 { border-color: #7e22ce !important; border-width: 2px !important; }
+    .border-blue-300, .border-blue-400 { border-color: #1d4ed8 !important; border-width: 2px !important; }
+    .border-sky-300, .border-sky-400 { border-color: #0284c7 !important; border-width: 2px !important; }
+    .border-indigo-100, .border-indigo-200 { border-color: #4338ca !important; border-width: 2px !important; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
 
-  <!-- Top Announcement / System Header (Updated to Version 1.1) -->
+  <!-- Top Announcement / System Header (Updated to Version 1.1.1) -->
   <header class="bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-700 text-white shadow-lg border-b border-emerald-900/30 sticky top-0 z-30">
     <div class="max-w-7xl mx-auto px-4 py-3.5 sm:py-5">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         
-        <!-- Hospital Branding & System Title (Enlarged & More Prominent) -->
+        <!-- Hospital Branding & System Title -->
         <div class="flex items-center gap-3.5 sm:gap-4">
           <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white p-1.5 backdrop-blur-md border border-white/50 flex items-center justify-center shadow-md flex-shrink-0 overflow-hidden shadow-emerald-950/25">
             <img id="hospitalLogoImg" src="logo.png" alt="โลโก้โรงพยาบาลแม่อาย" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Seal_of_the_Ministry_of_Public_Health_of_Thailand.svg/240px-Seal_of_the_Ministry_of_Public_Health_of_Thailand.svg.png';">
@@ -82,7 +160,7 @@
                 GREEN & CLEAN Hospital
               </span>
               <span class="bg-amber-400 text-slate-900 text-xs sm:text-sm px-3 py-0.5 rounded-full font-bold shadow-sm tracking-wide flex items-center gap-1">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Version 1.1
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Version 1.1.1
               </span>
               <span id="liveClock" class="text-xs sm:text-sm text-emerald-100/90 font-mono hidden md:inline-block"></span>
             </div>
@@ -135,85 +213,85 @@
   <!-- Main Container -->
   <main class="max-w-7xl mx-auto px-4 py-6 w-full flex-1">
     
-    <!-- Top Highlights / KPIs -->
+    <!-- Top Highlights / KPIs with Floating Green Frame -->
     <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mb-6">
-      <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between hover:border-emerald-300 transition">
-        <div class="flex items-center justify-between text-slate-500 text-xs sm:text-sm">
-          <span class="font-medium">ปริมาณใช้น้ำวันนี้</span>
-          <div class="w-7 h-7 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center">
+      <div class="eco-float-card p-4 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-slate-600 text-xs sm:text-sm">
+          <span class="font-semibold">ปริมาณใช้น้ำวันนี้</span>
+          <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-200">
             <i data-lucide="droplet" class="w-4 h-4"></i>
           </div>
         </div>
         <div class="mt-2">
-          <span id="kpiWater" class="text-xl sm:text-2xl font-bold text-slate-800">142.5</span>
+          <span id="kpiWater" class="text-xl sm:text-2xl font-bold font-mono text-slate-800">142.5</span>
           <span class="text-xs text-slate-500 font-normal"> ลบ.ม.</span>
         </div>
-        <div class="mt-1 text-[11px] text-emerald-600 flex items-center gap-1 font-medium">
-          <i data-lucide="trending-down" class="w-3 h-3"></i> ปกติ (มิเตอร์ 4 จุด)
+        <div class="mt-1 text-[11px] text-emerald-700 flex items-center gap-1 font-semibold">
+          <i data-lucide="trending-down" class="w-3 h-3 text-emerald-600"></i> ปกติ (มิเตอร์ 4 จุด)
         </div>
       </div>
 
-      <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between hover:border-teal-300 transition">
-        <div class="flex items-center justify-between text-slate-500 text-xs sm:text-sm">
-          <span class="font-medium">น้ำเสียเข้าระบบวันนี้</span>
-          <div class="w-7 h-7 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center">
+      <div class="eco-float-card p-4 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-slate-600 text-xs sm:text-sm">
+          <span class="font-semibold">น้ำเสียเข้าระบบวันนี้</span>
+          <div class="w-7 h-7 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center border border-teal-200">
             <i data-lucide="git-pull-request" class="w-4 h-4"></i>
           </div>
         </div>
         <div class="mt-2">
-          <span id="kpiWwtsInflow" class="text-xl sm:text-2xl font-bold text-teal-700">103.8</span>
+          <span id="kpiWwtsInflow" class="text-xl sm:text-2xl font-bold font-mono text-teal-800">103.8</span>
           <span class="text-xs text-slate-500 font-normal"> ลบ.ม.</span>
         </div>
-        <div class="mt-1 text-[11px] text-teal-600 flex items-center gap-1 font-medium">
-          <i data-lucide="clock" class="w-3 h-3"></i> ปั๊มทำงาน <span id="kpiWwtsHours" class="font-bold">6.5</span> ชม. (15.975 ลบ.ม./ชม.)
+        <div class="mt-1 text-[11px] text-teal-700 flex items-center gap-1 font-semibold">
+          <i data-lucide="clock" class="w-3 h-3 text-teal-600"></i> ปั๊มทำงาน <span id="kpiWwtsHours" class="font-bold">6.5</span> ชม. (15.975 ลบ.ม./ชม.)
         </div>
       </div>
 
-      <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between hover:border-emerald-300 transition">
-        <div class="flex items-center justify-between text-slate-500 text-xs sm:text-sm">
-          <span class="font-medium">คลอรีนคงเหลือ</span>
-          <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+      <div class="eco-float-card p-4 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-slate-600 text-xs sm:text-sm">
+          <span class="font-semibold">คลอรีนคงเหลือ</span>
+          <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-200">
             <i data-lucide="activity" class="w-4 h-4"></i>
           </div>
         </div>
         <div class="mt-2">
-          <span id="kpiChlorine" class="text-xl sm:text-2xl font-bold text-slate-800">0.35</span>
+          <span id="kpiChlorine" class="text-xl sm:text-2xl font-bold font-mono text-slate-800">0.35</span>
           <span class="text-xs text-slate-500 font-normal"> mg/L</span>
         </div>
-        <div class="mt-1 text-[11px] text-emerald-600 flex items-center gap-1 font-medium">
-          <i data-lucide="check-circle" class="w-3 h-3"></i> เกณฑ์ 0.2-0.5 mg/L
+        <div class="mt-1 text-[11px] text-emerald-700 flex items-center gap-1 font-semibold">
+          <i data-lucide="check-circle" class="w-3 h-3 text-emerald-600"></i> เกณฑ์ 0.2-0.5 mg/L
         </div>
       </div>
 
-      <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between hover:border-amber-300 transition">
-        <div class="flex items-center justify-between text-slate-500 text-xs sm:text-sm">
-          <span class="font-medium">ขยะติดเชื้อสะสม</span>
-          <div class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+      <div class="eco-float-card p-4 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-slate-600 text-xs sm:text-sm">
+          <span class="font-semibold">ขยะติดเชื้อสะสม</span>
+          <div class="w-7 h-7 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center border border-amber-200">
             <i data-lucide="trash-2" class="w-4 h-4"></i>
           </div>
         </div>
         <div class="mt-2">
-          <span id="kpiInfectious" class="text-xl sm:text-2xl font-bold text-slate-800">19.4</span>
+          <span id="kpiInfectious" class="text-xl sm:text-2xl font-bold font-mono text-slate-800">19.4</span>
           <span class="text-xs text-slate-500 font-normal"> กก.</span>
         </div>
-        <div class="mt-1 text-[11px] text-amber-600 flex items-center gap-1 font-medium">
-          <i data-lucide="clock" class="w-3 h-3"></i> รอส่งกำจัดตามรอบ
+        <div class="mt-1 text-[11px] text-amber-700 flex items-center gap-1 font-semibold">
+          <i data-lucide="clock" class="w-3 h-3 text-amber-600"></i> รอส่งกำจัดตามรอบ
         </div>
       </div>
 
-      <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between hover:border-emerald-300 transition">
-        <div class="flex items-center justify-between text-slate-500 text-xs sm:text-sm">
-          <span class="font-medium">อุบัติการณ์เดือนนี้</span>
-          <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+      <div class="eco-float-card p-4 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-slate-600 text-xs sm:text-sm">
+          <span class="font-semibold">อุบัติการณ์เดือนนี้</span>
+          <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-200">
             <i data-lucide="shield-check" class="w-4 h-4"></i>
           </div>
         </div>
         <div class="mt-2">
-          <span id="kpiAccident" class="text-xl sm:text-2xl font-bold text-emerald-700">0</span>
+          <span id="kpiAccident" class="text-xl sm:text-2xl font-bold font-mono text-emerald-800">0</span>
           <span class="text-xs text-slate-500 font-normal"> ครั้ง</span>
         </div>
-        <div class="mt-1 text-[11px] text-emerald-600 flex items-center gap-1 font-medium">
-          <i data-lucide="award" class="w-3 h-3"></i> Zero Accident
+        <div class="mt-1 text-[11px] text-emerald-700 flex items-center gap-1 font-semibold">
+          <i data-lucide="award" class="w-3 h-3 text-emerald-600"></i> Zero Incident
         </div>
       </div>
     </section>
@@ -266,8 +344,8 @@
     <!-- ========================================================== -->
     <section id="pane-waste-exec" class="tab-pane hidden space-y-6">
       
-      <!-- Executive Dashboard Top Banner & Filter Controls -->
-      <div class="bg-gradient-to-r from-amber-900 via-amber-800 to-emerald-900 text-white p-5 sm:p-6 rounded-3xl shadow-md border border-amber-700/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <!-- Executive Dashboard Top Banner -->
+      <div class="eco-float-card bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 text-white p-5 sm:p-6 shadow-lg border border-emerald-600/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div class="flex items-center gap-2 mb-1.5 flex-wrap">
             <span class="bg-amber-400 text-slate-900 font-bold text-xs px-3 py-0.5 rounded-full shadow-xs">WASTE MANAGEMENT DASHBOARD</span>
@@ -277,7 +355,7 @@
           <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
             บริหารจัดการขยะ เพื่อองค์กรที่ยั่งยืน โรงพยาบาลแม่อาย
           </h2>
-          <p class="text-xs text-amber-200/90 mt-1 italic">
+          <p class="text-xs text-emerald-200/90 mt-1 italic">
             “ข้อมูลขยะวันนี้ สู่สิ่งแวดล้อมที่ดีกว่าในวันหน้า • ขยะลดได้ ต้นทุนลดลง สิ่งแวดล้อมดีขึ้น องค์กรยั่งยืน”
           </p>
         </div>
@@ -285,8 +363,8 @@
         <!-- Controls: Period Selector & Target Unit -->
         <div class="flex flex-wrap items-center gap-2 self-stretch md:self-auto">
           <div class="bg-black/30 p-1 rounded-xl border border-white/10 flex items-center text-xs">
-            <span class="text-amber-200 px-2 font-medium">รอบ:</span>
-            <select id="execPeriodSelect" onchange="updateExecutiveWasteDashboard()" class="bg-amber-950 text-white text-xs font-semibold rounded-lg px-2.5 py-1.5 border border-amber-500/40 focus:outline-none">
+            <span class="text-emerald-200 px-2 font-medium">รอบ:</span>
+            <select id="execPeriodSelect" onchange="updateExecutiveWasteDashboard()" class="bg-emerald-950 text-white text-xs font-semibold rounded-lg px-2.5 py-1.5 border border-emerald-500/40 focus:outline-none">
               <option value="current_month" selected>เดือนปัจจุบัน (กันยายน ๒๕๖๙)</option>
               <option value="q4">ไตรมาส ๔ (ก.ค. - ก.ย. ๖๙)</option>
               <option value="year_2569">ประจำปีงบประมาณ ๒๕๖๙</option>
@@ -300,34 +378,34 @@
       </div>
 
       <!-- 1. WASTE KPI SUMMARY (ภาพรวมขยะทั้งสิ้น) -->
-      <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-3">
-        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+      <div class="eco-float-card p-5 space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b border-emerald-100">
           <h3 class="font-bold text-slate-800 text-sm sm:text-base flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xs font-bold">1</span>
+            <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-xs font-bold shadow-xs">1</span>
             WASTE KPI SUMMARY : ภาพรวมขยะทั้งหมด (โรงพยาบาลแม่อาย)
           </h3>
-          <span class="text-[11px] text-slate-500">เปรียบเทียบกับเกณฑ์มาตรฐาน GREEN & CLEAN Hospital</span>
+          <span class="text-[11px] text-emerald-800 font-medium bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">เปรียบเทียบเกณฑ์มาตรฐาน GREEN & CLEAN</span>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           <!-- KPI 1: ปริมาณขยะทั้งหมด -->
-          <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col justify-between">
-            <div class="flex items-center justify-between text-slate-500 text-xs">
+          <div class="eco-float-subcard p-3.5 flex flex-col justify-between">
+            <div class="flex items-center justify-between text-slate-600 text-xs font-medium">
               <span>ปริมาณขยะทั้งหมด</span>
-              <i data-lucide="trash" class="w-4 h-4 text-slate-600"></i>
+              <i data-lucide="trash" class="w-4 h-4 text-emerald-700"></i>
             </div>
             <div class="mt-2">
               <span id="execKpiTotal" class="text-xl sm:text-2xl font-bold font-mono text-slate-800">3,309.0</span>
               <span class="text-xs text-slate-500">กก.</span>
             </div>
-            <div class="text-[10px] text-emerald-600 mt-1 font-semibold flex items-center gap-0.5">
-              <i data-lucide="trending-down" class="w-3 h-3"></i> -8.4% vs เดือนก่อน
+            <div class="text-[10px] text-emerald-700 mt-1 font-semibold flex items-center gap-0.5">
+              <i data-lucide="trending-down" class="w-3 h-3 text-emerald-600"></i> -8.4% vs เดือนก่อน
             </div>
           </div>
 
           <!-- KPI 2: ขยะรีไซเคิล -->
-          <div class="p-3.5 bg-emerald-50/70 rounded-2xl border border-emerald-200 flex flex-col justify-between">
-            <div class="flex items-center justify-between text-emerald-800 text-xs font-medium">
+          <div class="eco-float-subcard p-3.5 bg-emerald-50/50 flex flex-col justify-between">
+            <div class="flex items-center justify-between text-emerald-900 text-xs font-medium">
               <span>ขยะรีไซเคิล</span>
               <i data-lucide="recycle" class="w-4 h-4 text-emerald-600"></i>
             </div>
@@ -341,8 +419,8 @@
           </div>
 
           <!-- KPI 3: ขยะติดเชื้อ รพ.แม่อาย -->
-          <div class="p-3.5 bg-rose-50/70 rounded-2xl border border-rose-200 flex flex-col justify-between">
-            <div class="flex items-center justify-between text-rose-800 text-xs font-medium">
+          <div class="eco-float-subcard p-3.5 bg-rose-50/40 flex flex-col justify-between border-l-rose-600">
+            <div class="flex items-center justify-between text-rose-900 text-xs font-medium">
               <span>ขยะติดเชื้อ (รพ.)</span>
               <i data-lucide="biohazard" class="w-4 h-4 text-rose-600"></i>
             </div>
@@ -350,14 +428,14 @@
               <span id="execKpiHospInf" class="text-xl sm:text-2xl font-bold font-mono text-rose-800">582.0</span>
               <span class="text-xs text-rose-700">กก.</span>
             </div>
-            <div class="text-[10px] text-emerald-600 mt-1 font-semibold flex items-center gap-0.5">
+            <div class="text-[10px] text-emerald-700 mt-1 font-semibold flex items-center gap-0.5">
               <i data-lucide="trending-down" class="w-3 h-3"></i> 0.32 กก./เตียง/วัน
             </div>
           </div>
 
           <!-- KPI 4: ขยะติดเชื้อรับฝาก (รพ.สต.) -->
-          <div class="p-3.5 bg-purple-50/70 rounded-2xl border border-purple-200 flex flex-col justify-between">
-            <div class="flex items-center justify-between text-purple-800 text-xs font-medium">
+          <div class="eco-float-subcard p-3.5 bg-purple-50/40 flex flex-col justify-between border-l-purple-600">
+            <div class="flex items-center justify-between text-purple-900 text-xs font-medium">
               <span>รับฝาก (รพ.สต.)</span>
               <i data-lucide="building" class="w-4 h-4 text-purple-600"></i>
             </div>
@@ -371,8 +449,8 @@
           </div>
 
           <!-- KPI 5: ค่าใช้จ่ายในการกำจัด -->
-          <div class="p-3.5 bg-amber-50/80 rounded-2xl border border-amber-300 flex flex-col justify-between">
-            <div class="flex items-center justify-between text-amber-900 text-xs font-medium">
+          <div class="eco-float-subcard p-3.5 bg-amber-50/50 flex flex-col justify-between border-l-amber-600">
+            <div class="flex items-center justify-between text-amber-950 text-xs font-medium">
               <span>ค่าใช้จ่ายกำจัดติดเชื้อ</span>
               <i data-lucide="banknote" class="w-4 h-4 text-amber-700"></i>
             </div>
@@ -386,14 +464,14 @@
           </div>
 
           <!-- KPI 6: อัตราการรีไซเคิล -->
-          <div class="p-3.5 bg-sky-50/70 rounded-2xl border border-sky-200 flex flex-col justify-between">
-            <div class="flex items-center justify-between text-sky-800 text-xs font-medium">
+          <div class="eco-float-subcard p-3.5 bg-sky-50/40 flex flex-col justify-between border-l-teal-600">
+            <div class="flex items-center justify-between text-teal-950 text-xs font-medium">
               <span>อัตราการรีไซเคิล</span>
-              <i data-lucide="percent" class="w-4 h-4 text-sky-600"></i>
+              <i data-lucide="percent" class="w-4 h-4 text-teal-600"></i>
             </div>
             <div class="mt-2">
-              <span id="execKpiRate" class="text-xl sm:text-2xl font-bold font-mono text-sky-900">16.5%</span>
-              <span class="text-xs text-sky-700">เป้า $\ge$15%</span>
+              <span id="execKpiRate" class="text-xl sm:text-2xl font-bold font-mono text-teal-900">16.5%</span>
+              <span class="text-xs text-teal-700">เป้า $\ge$15%</span>
             </div>
             <div class="text-[10px] text-emerald-700 mt-1 font-semibold flex items-center gap-0.5">
               <i data-lucide="check" class="w-3 h-3"></i> ผ่านเกณฑ์ GREEN
@@ -402,67 +480,67 @@
         </div>
       </div>
 
-      <!-- ROW 1 : Box 2, Box 3, Box 4 (Trend, Type, Area/Dept) -->
+      <!-- ROW 1 : Box 2, Box 3, Box 4 with Floating Green Frame -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         <!-- 2. WASTE GENERATION TREND -->
-        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-100">
+        <div class="eco-float-card p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2 pb-2 border-b border-emerald-100">
             <h3 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
-              <span class="w-5 h-5 rounded bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold">2</span>
+              <span class="w-5 h-5 rounded bg-emerald-700 text-white flex items-center justify-center text-[10px] font-bold">2</span>
               WASTE GENERATION TREND : แนวโน้มปริมาณขยะ
             </h3>
-            <span class="text-[10px] bg-slate-100 px-2 py-0.5 rounded text-slate-600 font-mono">กก./เดือน</span>
+            <span class="text-[10px] bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded text-emerald-800 font-mono font-semibold">กก./เดือน</span>
           </div>
           <p class="text-[11px] text-slate-500 mb-2">เปรียบเทียบปริมาณขยะมูลฝอยรวม vs เป้าหมายลดขยะ 10%</p>
           <div class="chart-container">
             <canvas id="chartExecTrend"></canvas>
           </div>
-          <div class="mt-2 pt-2 border-t border-slate-100 text-[11px] text-slate-500 flex justify-between">
+          <div class="mt-2 pt-2 border-t border-emerald-100 text-[11px] text-slate-500 flex justify-between">
             <span>เฉลี่ย: <strong class="text-slate-800 font-mono">110.3 กก./วัน</strong></span>
-            <span class="text-emerald-600 font-semibold">ทิศทางลดลงตามเป้าหมาย</span>
+            <span class="text-emerald-700 font-semibold">ทิศทางลดลงตามเป้าหมาย</span>
           </div>
         </div>
 
         <!-- 3. WASTE BY TYPE -->
-        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-100">
+        <div class="eco-float-card p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2 pb-2 border-b border-emerald-100">
             <h3 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
-              <span class="w-5 h-5 rounded bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold">3</span>
+              <span class="w-5 h-5 rounded bg-emerald-700 text-white flex items-center justify-center text-[10px] font-bold">3</span>
               WASTE BY TYPE : ขยะแยกตามประเภท (6 ชนิด)
             </h3>
-            <span class="text-[10px] bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded">สัดส่วน %</span>
+            <span class="text-[10px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-semibold">สัดส่วน %</span>
           </div>
           <p class="text-[11px] text-slate-500 mb-2">รวมขยะติดเชื้อของ รพ. และขยะรับฝากจาก รพ.สต. เครือข่าย</p>
           <div class="chart-container">
             <canvas id="chartExecType"></canvas>
           </div>
-          <div class="mt-2 pt-2 border-t border-slate-100 text-[11px] text-slate-500 flex justify-between">
+          <div class="mt-2 pt-2 border-t border-emerald-100 text-[11px] text-slate-500 flex justify-between">
             <span>ติดเชื้อรวม: <strong class="text-rose-700 font-mono">26.8%</strong></span>
             <span>ทั่วไป & อินทรีย์: <strong class="text-slate-700 font-mono">62.6%</strong></span>
           </div>
         </div>
 
         <!-- 4. WASTE BY AREA / DEPARTMENT -->
-        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-100">
+        <div class="eco-float-card p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2 pb-2 border-b border-emerald-100">
             <h3 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
-              <span class="w-5 h-5 rounded bg-amber-500 text-white flex items-center justify-center text-[10px] font-bold">4</span>
+              <span class="w-5 h-5 rounded bg-emerald-700 text-white flex items-center justify-center text-[10px] font-bold">4</span>
               WASTE BY AREA : ขยะตามตึก/แผนก/รพ.สต.
             </h3>
-            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded">จัดอันดับ</span>
+            <span class="text-[10px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-semibold">จัดอันดับ</span>
           </div>
           <p class="text-[11px] text-slate-500 mb-2">สถิติปริมาณขยะติดเชื้อแยกตามแหล่งกำเนิด (Audit แหล่งกำเนิด)</p>
           
           <div class="overflow-y-auto custom-scroll max-h-[220px] space-y-2 text-xs">
-            <div class="p-2 bg-slate-50 rounded-xl border border-slate-200/80 flex items-center justify-between">
+            <div class="p-2 bg-slate-50 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-emerald-50/50 transition">
               <div>
                 <strong class="text-slate-800">ตึกผู้ป่วยใน (IPD ชาย-หญิง)</strong>
                 <span class="text-[10px] text-slate-500 block">สัดส่วน 31.5% ของ รพ.</span>
               </div>
               <span class="font-mono font-bold text-rose-700">183.3 กก.</span>
             </div>
-            <div class="p-2 bg-slate-50 rounded-xl border border-slate-200/80 flex items-center justify-between">
+            <div class="p-2 bg-slate-50 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-emerald-50/50 transition">
               <div>
                 <strong class="text-slate-800">อุบัติเหตุฉุกเฉิน (ER)</strong>
                 <span class="text-[10px] text-slate-500 block">สัดส่วน 21.0% ของ รพ.</span>
@@ -483,14 +561,14 @@
               </div>
               <span class="font-mono font-bold text-purple-800">98.0 กก.</span>
             </div>
-            <div class="p-2 bg-slate-50 rounded-xl border border-slate-200/80 flex items-center justify-between">
+            <div class="p-2 bg-slate-50 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-emerald-50/50 transition">
               <div>
                 <strong class="text-slate-800">ห้องคลอด & ผ่าตัด (OR/LR)</strong>
                 <span class="text-[10px] text-slate-500 block">สัดส่วน 16.5% ของ รพ.</span>
               </div>
               <span class="font-mono font-bold text-rose-700">96.0 กก.</span>
             </div>
-            <div class="p-2 bg-slate-50 rounded-xl border border-slate-200/80 flex items-center justify-between">
+            <div class="p-2 bg-slate-50 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-emerald-50/50 transition">
               <div>
                 <strong class="text-slate-800">แผนกผู้ป่วยนอก (OPD)</strong>
                 <span class="text-[10px] text-slate-500 block">สัดส่วน 14.2% ของ รพ.</span>
@@ -499,7 +577,7 @@
             </div>
           </div>
 
-          <div class="mt-2 pt-2 border-t border-slate-100 text-[11px] text-slate-500 flex justify-between">
+          <div class="mt-2 pt-2 border-t border-emerald-100 text-[11px] text-slate-500 flex justify-between">
             <span>รวมขยะติดเชื้อทั้งหมด:</span>
             <strong class="text-rose-800 font-mono">888.0 กก./เดือน</strong>
           </div>
@@ -507,14 +585,14 @@
 
       </div>
 
-      <!-- ROW 2 : Box 5, Box 6, Box 7 (Recycling, Disposal Methods, Cost Analysis) -->
+      <!-- ROW 2 : Box 5, Box 6, Box 7 with Floating Green Frame -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         <!-- 5. RECYCLING PERFORMANCE & INCOME -->
-        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-100">
+        <div class="eco-float-card p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2 pb-2 border-b border-emerald-100">
             <h3 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
-              <span class="w-5 h-5 rounded bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold">5</span>
+              <span class="w-5 h-5 rounded bg-emerald-700 text-white flex items-center justify-center text-[10px] font-bold">5</span>
               RECYCLING : ประสิทธิภาพรีไซเคิล & รายได้
             </h3>
             <span class="text-[10px] bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded font-semibold border border-emerald-200">กองทุนสวัสดิการ</span>
@@ -524,7 +602,7 @@
             <div class="p-2.5 bg-emerald-50/70 rounded-xl border border-emerald-200">
               <span class="text-[11px] text-emerald-800 block">ปริมาณรีไซเคิลรวม</span>
               <strong class="text-base sm:text-lg text-emerald-950 font-mono">546.0 กก.</strong>
-              <span class="text-[10px] text-emerald-600 block mt-0.5">+18.2% vs เป้าหมาย</span>
+              <span class="text-[10px] text-emerald-700 block mt-0.5">+18.2% vs เป้าหมาย</span>
             </div>
             <div class="p-2.5 bg-amber-50/70 rounded-xl border border-amber-200">
               <span class="text-[11px] text-amber-900 block">รายได้สะสมเข้ากองทุน</span>
@@ -573,38 +651,38 @@
             </div>
           </div>
 
-          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">
-            คัดแยกก่อนทิ้ง ลดภาระค่าเผาขยะติดเชื้อได้เดือนละกว่า <strong>7,640 บาท</strong>
+          <div class="mt-3 pt-2 border-t border-emerald-100 text-[11px] text-slate-500">
+            คัดแยกก่อนทิ้ง ลดภาระค่าเผาขยะติดเชื้อได้เดือนละกว่า <strong class="text-emerald-800">7,640 บาท</strong>
           </div>
         </div>
 
         <!-- 6. WASTE DISPOSAL METHOD -->
-        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-100">
+        <div class="eco-float-card p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2 pb-2 border-b border-emerald-100">
             <h3 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
-              <span class="w-5 h-5 rounded bg-teal-600 text-white flex items-center justify-center text-[10px] font-bold">6</span>
+              <span class="w-5 h-5 rounded bg-emerald-700 text-white flex items-center justify-center text-[10px] font-bold">6</span>
               DISPOSAL METHOD : วิธีการกำจัดขยะ
             </h3>
-            <span class="text-[10px] bg-teal-50 text-teal-800 px-2 py-0.5 rounded border border-teal-200">ปลายทางขยะ</span>
+            <span class="text-[10px] bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200 font-semibold">ปลายทางขยะ</span>
           </div>
           <p class="text-[11px] text-slate-500 mb-2">ลดการฝังกลบ (Landfill Diversion) เพิ่มการแปรรูปใช้ประโยชน์</p>
           <div class="chart-container">
             <canvas id="chartExecMethod"></canvas>
           </div>
-          <div class="mt-2 pt-2 border-t border-slate-100 text-[11px] text-slate-500 flex justify-between">
+          <div class="mt-2 pt-2 border-t border-emerald-100 text-[11px] text-slate-500 flex justify-between">
             <span>แปรรูปกลับมาใช้ประโยชน์:</span>
             <strong class="text-emerald-700 font-mono">38.2% (รีไซเคิล+ทำปุ๋ย)</strong>
           </div>
         </div>
 
         <!-- 7. WASTE COST ANALYSIS -->
-        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-100">
+        <div class="eco-float-card p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2 pb-2 border-b border-emerald-100">
             <h3 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
-              <span class="w-5 h-5 rounded bg-amber-600 text-white flex items-center justify-center text-[10px] font-bold">7</span>
+              <span class="w-5 h-5 rounded bg-emerald-700 text-white flex items-center justify-center text-[10px] font-bold">7</span>
               COST ANALYSIS : วิเคราะห์ต้นทุนค่ากำจัด
             </h3>
-            <span class="text-[10px] bg-amber-50 text-amber-800 px-2 py-0.5 rounded border border-amber-200">งบประมาณ</span>
+            <span class="text-[10px] bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200 font-semibold">งบประมาณ</span>
           </div>
 
           <div class="space-y-3 my-1">
@@ -628,7 +706,7 @@
             </div>
 
             <!-- Net Cost Card -->
-            <div class="p-3.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-2xl shadow-sm flex items-center justify-between">
+            <div class="p-3.5 bg-gradient-to-r from-emerald-700 to-teal-700 text-white rounded-2xl shadow-sm flex items-center justify-between">
               <div>
                 <span class="text-xs opacity-90 block">ค่าใช้จ่ายสุทธิจริงรอบเดือน:</span>
                 <strong class="text-xl font-mono font-bold">10,112 บาท</strong>
@@ -639,31 +717,30 @@
             </div>
           </div>
 
-          <div class="mt-2 pt-2 border-t border-slate-100 text-[10px] text-slate-500">
+          <div class="mt-2 pt-2 border-t border-emerald-100 text-[10px] text-slate-500">
             *คำนวณตามอัตราจ้างเหมาเอกชนรับขนและทำลายขยะติดเชื้อ 14.00 บาท/กิโลกรัม
           </div>
         </div>
 
       </div>
 
-      <!-- ROW 3 : Box 8, Box 9, Box 10 (Hazardous Control, ESG / Green, Alert & CAPA) -->
+      <!-- ROW 3 : Box 8, Box 9, Box 10 with Floating Green Frame -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         <!-- 8. HAZARDOUS & INFECTIOUS CONTROL -->
-        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-100">
+        <div class="eco-float-card p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2 pb-2 border-b border-emerald-100">
             <h3 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
-              <span class="w-5 h-5 rounded bg-rose-600 text-white flex items-center justify-center text-[10px] font-bold">8</span>
+              <span class="w-5 h-5 rounded bg-emerald-700 text-white flex items-center justify-center text-[10px] font-bold">8</span>
               HAZARDOUS CONTROL : ควบคุมขยะอันตราย & ติดเชื้อ
             </h3>
             <span class="text-[10px] bg-rose-50 text-rose-800 px-2 py-0.5 rounded font-semibold border border-rose-200">กฎหมาย สธ.</span>
           </div>
 
           <div class="space-y-2.5 text-xs">
-            <!-- Cold Room Temp -->
             <div class="p-3 bg-rose-50/60 rounded-2xl border border-rose-200 flex items-center justify-between">
               <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-xl bg-rose-500 text-white flex items-center justify-center">
+                <div class="w-8 h-8 rounded-xl bg-rose-600 text-white flex items-center justify-center">
                   <i data-lucide="thermometer" class="w-4 h-4"></i>
                 </div>
                 <div>
@@ -673,11 +750,10 @@
               </div>
               <div class="text-right">
                 <span class="text-lg font-bold font-mono text-rose-800">8.0 °C</span>
-                <span class="text-[10px] text-emerald-600 block font-semibold">● ผ่านเกณฑ์</span>
+                <span class="text-[10px] text-emerald-700 block font-semibold">● ผ่านเกณฑ์</span>
               </div>
             </div>
 
-            <!-- Manifest Tracking -->
             <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between">
               <div>
                 <strong class="text-slate-800 block">ใบกำกับการขนส่ง (Manifest)</strong>
@@ -688,7 +764,6 @@
               </span>
             </div>
 
-            <!-- Sharp / Needles & Cytotoxic -->
             <div class="grid grid-cols-2 gap-2 text-[11px]">
               <div class="p-2.5 bg-amber-50/70 border border-amber-200 rounded-xl">
                 <span class="text-amber-800 block">เข็ม & ของมีคม</span>
@@ -703,22 +778,22 @@
             </div>
           </div>
 
-          <div class="mt-2 pt-2 border-t border-slate-100 text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
+          <div class="mt-2 pt-2 border-t border-emerald-100 text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
             <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> ถูกต้องตามระเบียบกระทรวงสาธารณสุข 100%
           </div>
         </div>
 
         <!-- 9. WASTE REDUCTION & ESG TARGET -->
-        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-100">
+        <div class="eco-float-card p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2 pb-2 border-b border-emerald-100">
             <h3 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
-              <span class="w-5 h-5 rounded bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold">9</span>
+              <span class="w-5 h-5 rounded bg-emerald-700 text-white flex items-center justify-center text-[10px] font-bold">9</span>
               ESG & CARBON REDUCTION : ลดก๊าซเรือนกระจก
             </h3>
-            <span class="text-[10px] bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200">Green Hospital</span>
+            <span class="text-[10px] bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200 font-semibold">Green Hospital</span>
           </div>
 
-          <div class="p-4 bg-gradient-to-br from-emerald-800 to-teal-900 text-white rounded-2xl space-y-3">
+          <div class="p-4 bg-gradient-to-br from-emerald-850 via-emerald-800 to-teal-900 text-white rounded-2xl space-y-3">
             <div class="flex items-center justify-between">
               <div>
                 <span class="text-xs text-emerald-200 block">ลดการปล่อยก๊าซเรือนกระจก</span>
@@ -733,7 +808,6 @@
             </p>
           </div>
 
-          <!-- Progress to Annual Goal -->
           <div class="space-y-1.5 my-2">
             <div class="flex justify-between text-xs">
               <span class="text-slate-600">ความก้าวหน้าสู่เป้าหมายขยะลดลง 15%:</span>
@@ -745,24 +819,23 @@
             <span class="text-[10px] text-slate-500 block">เหลืออีก 2.6% จะบรรลุเป้าหมายปีงบประมาณ 2569</span>
           </div>
 
-          <div class="pt-2 border-t border-slate-100 text-[11px] text-slate-600 flex items-center justify-between">
+          <div class="pt-2 border-t border-emerald-100 text-[11px] text-slate-600 flex items-center justify-between">
             <span>เกณฑ์ GREEN & CLEAN:</span>
             <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">ระดับดีมาก (Very Good)</span>
           </div>
         </div>
 
         <!-- 10. WASTE ALERT & ACTION (CAPA) -->
-        <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-2 pb-2 border-b border-slate-100">
+        <div class="eco-float-card p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2 pb-2 border-b border-emerald-100">
             <h3 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-2">
-              <span class="w-5 h-5 rounded bg-rose-600 text-white flex items-center justify-center text-[10px] font-bold">10</span>
+              <span class="w-5 h-5 rounded bg-emerald-700 text-white flex items-center justify-center text-[10px] font-bold">10</span>
               ALERT & ACTION : เฝ้าระวัง & สิ่งที่ต้องดำเนินการ
             </h3>
             <span class="text-[10px] bg-rose-50 text-rose-800 px-2 py-0.5 rounded font-semibold border border-rose-200">งานติดตาม</span>
           </div>
 
           <div class="overflow-y-auto custom-scroll max-h-[220px] space-y-2 text-xs">
-            <!-- Alert 1 -->
             <div class="p-2.5 bg-amber-50/70 border border-amber-200 rounded-xl space-y-1">
               <div class="flex items-center justify-between">
                 <strong class="text-amber-900 flex items-center gap-1">
@@ -773,7 +846,6 @@
               <p class="text-[11px] text-slate-600">พื้นที่: แผนกอุบัติเหตุฉุกเฉิน (ER) • ประสานหัวหน้าเวรทบทวนการคัดแยก</p>
             </div>
 
-            <!-- Alert 2 -->
             <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
               <div class="flex items-center justify-between">
                 <strong class="text-slate-800 flex items-center gap-1">
@@ -784,7 +856,6 @@
               <p class="text-[11px] text-slate-600">วันที่ 14 ก.ย. 69 เวลา 10:00 น. • เตรียมนั่งชั่งและใบ Manifest</p>
             </div>
 
-            <!-- Alert 3 -->
             <div class="p-2.5 bg-emerald-50/60 border border-emerald-200 rounded-xl space-y-1">
               <div class="flex items-center justify-between">
                 <strong class="text-emerald-900 flex items-center gap-1">
@@ -796,9 +867,9 @@
             </div>
           </div>
 
-          <div class="mt-2 pt-2 border-t border-slate-100 text-[11px] text-slate-500 flex justify-between items-center">
+          <div class="mt-2 pt-2 border-t border-emerald-100 text-[11px] text-slate-500 flex justify-between items-center">
             <span>สถานะงานควบคุมขยะ:</span>
-            <button onclick="switchCategory('maintenance')" class="text-indigo-600 font-semibold hover:underline">
+            <button onclick="switchCategory('maintenance')" class="text-emerald-700 font-semibold hover:underline">
               ดูประวัติงานซ่อม CAPA $\rightarrow$
             </button>
           </div>
@@ -809,142 +880,146 @@
     </section>
 
     <!-- ========================================================== -->
-    <!-- TAB 0: Analytics & Graphs Section (Existing Overall Dashboard) -->
+    <!-- TAB 0: Analytics & Graphs Section (with Floating Green Frame) -->
     <!-- ========================================================== -->
     <section id="pane-analytics" class="tab-pane space-y-6">
       
-      <!-- Dashboard Top Filter & Period Controls -->
-      <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <!-- Dashboard Top Filter with Strong Border -->
+      <div class="eco-float-card p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-2 border-emerald-700 shadow-md">
         <div>
-          <h2 class="font-bold text-slate-800 text-base sm:text-lg flex items-center gap-2">
-            <i data-lucide="trending-up" class="w-5 h-5 text-emerald-600"></i>
+          <h2 class="font-bold text-slate-900 text-base sm:text-lg flex items-center gap-2">
+            <i data-lucide="trending-up" class="w-5 h-5 text-emerald-700"></i>
             ศูนย์รวมสถิติและแนวโน้มด้านสิ่งแวดล้อม (Environmental Analytics)
           </h2>
-          <p class="text-xs text-slate-500 mt-0.5">วิเคราะห์ข้อมูลการใช้น้ำ, ประสิทธิภาพบ่อบำบัด, ขยะ 5 ประเภท และสถิติงานซ่อมบำรุง</p>
+          <p class="text-xs text-slate-600 mt-0.5 font-medium">วิเคราะห์ข้อมูลการใช้น้ำ, ประสิทธิภาพบ่อบำบัด, ขยะ 5 ประเภท และสถิติงานซ่อมบำรุง</p>
         </div>
         <div class="flex items-center gap-2 self-stretch sm:self-auto">
-          <span class="text-xs text-slate-500 font-medium whitespace-nowrap">ช่วงเวลา:</span>
-          <div class="inline-flex rounded-xl p-1 bg-slate-100 border border-slate-200 text-xs w-full sm:w-auto">
-            <button onclick="changeChartPeriod('7d')" id="btnPeriod7d" class="px-3 py-1.5 rounded-lg font-semibold bg-white text-emerald-800 shadow-sm transition flex-1 sm:flex-none">7 วันล่าสุด</button>
-            <button onclick="changeChartPeriod('30d')" id="btnPeriod30d" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex-1 sm:flex-none">30 วัน</button>
-            <button onclick="changeChartPeriod('all')" id="btnPeriodAll" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex-1 sm:flex-none">รายไตรมาส</button>
+          <span class="text-xs text-slate-700 font-bold whitespace-nowrap">ช่วงเวลา:</span>
+          <div class="inline-flex rounded-xl p-1 bg-slate-200/90 border-2 border-slate-400 text-xs w-full sm:w-auto shadow-inner">
+            <button onclick="changeChartPeriod('7d')" id="btnPeriod7d" class="px-3.5 py-1.5 rounded-lg font-bold bg-white text-emerald-900 shadow border border-slate-300 transition flex-1 sm:flex-none">7 วันล่าสุด</button>
+            <button onclick="changeChartPeriod('30d')" id="btnPeriod30d" class="px-3.5 py-1.5 rounded-lg text-slate-700 font-medium hover:text-slate-900 transition flex-1 sm:flex-none">30 วัน</button>
+            <button onclick="changeChartPeriod('all')" id="btnPeriodAll" class="px-3.5 py-1.5 rounded-lg text-slate-700 font-medium hover:text-slate-900 transition flex-1 sm:flex-none">รายไตรมาส</button>
           </div>
         </div>
       </div>
 
-      <!-- 4 Visual Graphs Grid -->
+      <!-- 4 Visual Graphs Grid with High-Contrast Frames -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
         <!-- Chart 1: Water Trend -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-3">
+        <div class="eco-float-card p-5 flex flex-col justify-between border-2 border-emerald-700 shadow-md">
+          <div class="flex items-center justify-between mb-3 pb-2.5 border-b-2 border-emerald-600/30">
             <div>
-              <h3 class="font-bold text-slate-800 text-sm sm:text-base flex items-center gap-2">
-                <i data-lucide="droplets" class="w-4 h-4 text-sky-600"></i>
+              <h3 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                <i data-lucide="droplets" class="w-4.5 h-4.5 text-emerald-700"></i>
                 1. แนวโน้มปริมาณการใช้น้ำประปารายวัน (ลบ.ม.)
               </h3>
-              <p class="text-[11px] text-slate-500">เปรียบเทียบปริมาณน้ำดิบเข้าโรงกรอง vs เกณฑ์เฝ้าระวังน้ำรั่ว</p>
+              <p class="text-[11px] text-slate-600 font-medium">เปรียบเทียบปริมาณน้ำดิบเข้าโรงกรอง vs เกณฑ์เฝ้าระวังน้ำรั่ว</p>
             </div>
-            <span class="text-[11px] bg-sky-50 text-sky-700 px-2 py-0.5 rounded-md font-medium border border-sky-200">
+            <span class="text-[11px] bg-emerald-100 text-emerald-900 px-3 py-1 rounded-lg font-bold border-2 border-emerald-600 shadow-xs">
               ลบ.ม./วัน
             </span>
           </div>
-          <div class="chart-container">
+          <div class="chart-container bg-slate-50/60 p-2 rounded-xl border border-slate-300">
             <canvas id="chartWaterTrend"></canvas>
           </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>ค่าเฉลี่ยรายวัน: <strong class="text-slate-800 font-mono">140.0 ลบ.ม.</strong></span>
-            <span class="text-emerald-600 flex items-center gap-1 font-medium"><i data-lucide="shield-check" class="w-3.5 h-3.5"></i> ภายในเกณฑ์ปกติ</span>
+          <div class="mt-3 pt-3 border-t-2 border-emerald-600/30 flex items-center justify-between text-xs text-slate-600">
+            <span>ค่าเฉลี่ยรายวัน: <strong class="text-slate-900 font-mono font-bold text-sm">140.0 ลบ.ม.</strong></span>
+            <span class="text-emerald-800 flex items-center gap-1 font-bold bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-400">
+              <i data-lucide="shield-check" class="w-4 h-4 text-emerald-700"></i> ภายในเกณฑ์ปกติ
+            </span>
           </div>
         </div>
 
         <!-- Chart 2: Waste Composition -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-3">
+        <div class="eco-float-card p-5 flex flex-col justify-between border-2 border-emerald-700 shadow-md">
+          <div class="flex items-center justify-between mb-3 pb-2.5 border-b-2 border-emerald-600/30">
             <div>
-              <h3 class="font-bold text-slate-800 text-sm sm:text-base flex items-center gap-2">
-                <i data-lucide="pie-chart" class="w-4 h-4 text-amber-600"></i>
+              <h3 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                <i data-lucide="pie-chart" class="w-4.5 h-4.5 text-amber-700"></i>
                 2. สัดส่วนขยะมูลฝอย 5 ประเภท (กก.)
               </h3>
-              <p class="text-[11px] text-slate-500">ทั่วไป, รีไซเคิล, อินทรีย์, ขยะอันตราย และขยะติดเชื้อ</p>
+              <p class="text-[11px] text-slate-600 font-medium">ทั่วไป, รีไซเคิล, อินทรีย์, ขยะอันตราย และขยะติดเชื้อ</p>
             </div>
-            <span class="text-[11px] bg-amber-50 text-amber-800 px-2 py-0.5 rounded-md font-medium border border-amber-200">
+            <span class="text-[11px] bg-amber-100 text-amber-950 px-3 py-1 rounded-lg font-bold border-2 border-amber-600 shadow-xs">
               สัดส่วน %
             </span>
           </div>
-          <div class="chart-container">
+          <div class="chart-container bg-slate-50/60 p-2 rounded-xl border border-slate-300">
             <canvas id="chartWastePie"></canvas>
           </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>ขยะติดเชื้อเฉลี่ย: <strong class="text-rose-600 font-mono">17.6%</strong> | ขยะอันตราย: <strong class="text-amber-600 font-mono">2.9%</strong></span>
-            <span class="text-slate-600">รวม 110.3 กก./วัน</span>
+          <div class="mt-3 pt-3 border-t-2 border-emerald-600/30 flex items-center justify-between text-xs text-slate-600">
+            <span>ขยะติดเชื้อเฉลี่ย: <strong class="text-rose-800 font-mono font-bold">17.6%</strong> | ขยะอันตราย: <strong class="text-amber-800 font-mono font-bold">2.9%</strong></span>
+            <span class="text-slate-900 font-bold bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-300">รวม 110.3 กก./วัน</span>
           </div>
         </div>
 
         <!-- Chart 3: Wastewater Treatment Inflow Volume & Quality -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-3">
+        <div class="eco-float-card p-5 flex flex-col justify-between border-2 border-emerald-700 shadow-md">
+          <div class="flex items-center justify-between mb-3 pb-2.5 border-b-2 border-teal-600/30">
             <div>
-              <h3 class="font-bold text-slate-800 text-sm sm:text-base flex items-center gap-2">
-                <i data-lucide="waves" class="w-4 h-4 text-teal-600"></i>
+              <h3 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                <i data-lucide="waves" class="w-4.5 h-4.5 text-teal-700"></i>
                 3. ปริมาณน้ำเสียเข้าระบบและคุณภาพน้ำ (Inflow m³ & DO / pH / Cl₂)
               </h3>
-              <p class="text-[11px] text-slate-500">ปริมาณน้ำเสียคำนวณจาก ชม.ปั๊ม x 15.975 ลบ.ม./ชม. ควบคู่ DO ≥ 2.0 mg/L</p>
+              <p class="text-[11px] text-slate-600 font-medium">ปริมาณน้ำเสียคำนวณจาก ชม.ปั๊ม x 15.975 ลบ.ม./ชม. ควบคู่ DO ≥ 2.0 mg/L</p>
             </div>
-            <span class="text-[11px] bg-teal-50 text-teal-700 px-2 py-0.5 rounded-md font-medium border border-teal-200">
+            <span class="text-[11px] bg-teal-100 text-teal-950 px-3 py-1 rounded-lg font-bold border-2 border-teal-600 shadow-xs">
               น้ำเสีย & บ่อบำบัด
             </span>
           </div>
-          <div class="chart-container">
+          <div class="chart-container bg-slate-50/60 p-2 rounded-xl border border-slate-300">
             <canvas id="chartWwts"></canvas>
           </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span class="text-teal-800 font-medium">น้ำเสียเข้าระบบล่าสุด: <strong id="chartInflowNote" class="font-mono text-teal-700 font-bold">103.8 ลบ.ม.</strong> | DO: <strong class="font-mono">2.8 mg/L</strong></span>
-            <span class="text-emerald-600 flex items-center gap-1 font-medium"><i data-lucide="check" class="w-3.5 h-3.5"></i> เดินระบบสมบูรณ์</span>
+          <div class="mt-3 pt-3 border-t-2 border-teal-600/30 flex items-center justify-between text-xs text-slate-600">
+            <span class="text-teal-950 font-medium">น้ำเสียเข้าระบบล่าสุด: <strong id="chartInflowNote" class="font-mono text-teal-900 font-bold text-sm">103.8 ลบ.ม.</strong> | DO: <strong class="font-mono font-bold text-emerald-800">2.8 mg/L</strong></span>
+            <span class="text-emerald-800 flex items-center gap-1 font-bold bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-400">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-700"></i> เดินระบบสมบูรณ์
+            </span>
           </div>
         </div>
 
         <!-- Chart 4: Maintenance Issues -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-3">
+        <div class="eco-float-card p-5 flex flex-col justify-between border-2 border-emerald-700 shadow-md">
+          <div class="flex items-center justify-between mb-3 pb-2.5 border-b-2 border-emerald-600/30">
             <div>
-              <h3 class="font-bold text-slate-800 text-sm sm:text-base flex items-center gap-2">
-                <i data-lucide="wrench" class="w-4 h-4 text-indigo-600"></i>
+              <h3 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                <i data-lucide="wrench" class="w-4.5 h-4.5 text-indigo-700"></i>
                 4. สถิติจุดที่พบปัญหาและงานซ่อมบำรุง (ครั้ง)
               </h3>
-              <p class="text-[11px] text-slate-500">จำแนกตามระบบสาธารณูปโภคเพื่อวางแผนซ่อมเชิงป้องกัน (PM)</p>
+              <p class="text-[11px] text-slate-600 font-medium">จำแนกตามระบบสาธารณูปโภคเพื่อวางแผนซ่อมเชิงป้องกัน (PM)</p>
             </div>
-            <span class="text-[11px] bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-md font-medium border border-indigo-200">
+            <span class="text-[11px] bg-indigo-100 text-indigo-950 px-3 py-1 rounded-lg font-bold border-2 border-indigo-600 shadow-xs">
               สถิติปัญหา
             </span>
           </div>
-          <div class="chart-container">
+          <div class="chart-container bg-slate-50/60 p-2 rounded-xl border border-slate-300">
             <canvas id="chartMaintBar"></canvas>
           </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>อัตราแก้ไขเสร็จสิ้น: <strong class="text-indigo-700 font-mono">100%</strong></span>
-            <span class="text-emerald-600 font-medium">ไม่มีรายการค้างซ่อม</span>
+          <div class="mt-3 pt-3 border-t-2 border-emerald-600/30 flex items-center justify-between text-xs text-slate-600">
+            <span>อัตราแก้ไขเสร็จสิ้น: <strong class="text-indigo-900 font-mono font-bold text-sm">100%</strong></span>
+            <span class="text-emerald-800 font-bold bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-400">ไม่มีรายการค้างซ่อม</span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- TAB 1: Water & Meter Section -->
+    <!-- TAB 1: Water & Meter Section (with Floating Green Frame) -->
     <section id="pane-water" class="tab-pane hidden">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm">
-          <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
-            <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center">
-                <i data-lucide="droplet" class="w-5 h-5"></i>
+        <div class="lg:col-span-2 eco-float-card p-5 sm:p-6 border-2 border-emerald-700 shadow-md">
+          <div class="flex items-center justify-between pb-4 mb-4 border-b-2 border-emerald-600/30">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center border-2 border-emerald-600 shadow-xs">
+                <i data-lucide="droplet" class="w-6 h-6"></i>
               </div>
               <div>
-                <h2 class="font-semibold text-slate-800 text-base sm:text-lg">บันทึกเลขมิเตอร์และการใช้น้ำประจำวัน</h2>
-                <p class="text-xs text-slate-500">โรงกรองน้ำประปาและระบบจ่ายน้ำ รพ.แม่อาย</p>
+                <h2 class="font-bold text-slate-900 text-base sm:text-lg">บันทึกเลขมิเตอร์และการใช้น้ำประจำวัน</h2>
+                <p class="text-xs text-slate-600 font-medium">โรงกรองน้ำประปาและระบบจ่ายน้ำ รพ.แม่อาย</p>
               </div>
             </div>
-            <span class="text-xs bg-sky-50 text-sky-700 font-medium px-2.5 py-1 rounded-lg border border-sky-200">
+            <span class="text-xs bg-emerald-100 text-emerald-900 font-bold px-3 py-1.5 rounded-xl border-2 border-emerald-600 shadow-xs">
               จดบันทึกรายวัน
             </span>
           </div>
@@ -952,109 +1027,122 @@
           <form id="waterForm" onsubmit="handleWaterSubmit(event)" class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label class="block text-xs font-semibold text-slate-600 mb-1.5">จุดติดตั้งมิเตอร์น้ำ / อาคาร</label>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">จุดติดตั้งมิเตอร์น้ำ / อาคาร *</label>
                 <div class="relative">
-                  <select id="waterMeterSelect" onchange="updatePreviousWaterMeter()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition appearance-none">
+                  <select id="waterMeterSelect" onchange="updatePreviousWaterMeter()" class="w-full bg-slate-50 border-2 border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition appearance-none shadow-xs">
                     <option value="M-01">M-01: มิเตอร์น้ำดิบเข้าโรงกรอง</option>
                     <option value="M-02">M-02: มิเตอร์ส่งจ่ายน้ำประปารวม</option>
                     <option value="M-03">M-03: มิเตอร์อาคารผู้ป่วยนอก (OPD)</option>
                     <option value="M-04">M-04: มิเตอร์อาคารสนับสนุน / ซักฟอก / โภชนาการ</option>
                   </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
-                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-700">
+                    <i data-lucide="chevron-down" class="w-4.5 h-4.5"></i>
                   </div>
                 </div>
               </div>
 
               <div>
                 <div class="flex items-center justify-between mb-1.5">
-                  <label class="text-xs font-semibold text-slate-600">วันที่บันทึก</label>
-                  <span class="text-[10px] text-emerald-600 font-medium">📅 ย้อนหลังได้ไม่เกิน 15 วัน</span>
+                  <label class="text-xs font-bold text-slate-700">วันที่บันทึก *</label>
+                  <span class="text-[11px] text-emerald-800 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-300">📅 ย้อนหลังได้ไม่เกิน 15 วัน</span>
                 </div>
-                <input type="date" id="waterDate" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition" required>
+                <input type="date" id="waterDate" class="w-full bg-slate-50 border-2 border-slate-700 rounded-xl px-3.5 py-2 text-sm font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition shadow-xs" required>
               </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50/70 p-4 rounded-xl border border-slate-200">
-              <div>
-                <label class="block text-xs font-medium text-slate-500 mb-1">เลขมิเตอร์ครั้งก่อนหน้า (ลบ.ม.)</label>
-                <input type="number" id="waterPrev" class="w-full bg-slate-200/80 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono text-slate-700 cursor-not-allowed" readonly value="14250.0">
+            <!-- Prominent High-Contrast Meter Comparison Box -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-emerald-50/40 p-4 rounded-2xl border-2 border-emerald-700 shadow-sm">
+              <div class="bg-white p-3 rounded-xl border-2 border-slate-400">
+                <label class="block text-xs font-bold text-slate-700 mb-1">เลขมิเตอร์ครั้งก่อนหน้า (ลบ.ม.)</label>
+                <input type="number" id="waterPrev" class="w-full bg-slate-100 border-2 border-slate-400 rounded-lg px-3 py-2 text-base font-mono font-bold text-slate-800 cursor-not-allowed" readonly value="14250.0">
+                <span class="text-[10px] text-slate-500 font-medium block mt-1">อ้างอิงจากฐานข้อมูลล่าสุด</span>
               </div>
-              <div>
-                <label class="block text-xs font-semibold text-slate-700 mb-1">เลขมิเตอร์ที่อ่านได้วันนี้ (ลบ.ม.) *</label>
-                <input type="number" step="0.1" id="waterCurrent" oninput="calculateWaterDiff()" class="w-full bg-white border-2 border-emerald-400 rounded-lg px-3 py-2 text-sm font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition" placeholder="กรอกตัวเลขหน้าปัด" required>
+              <div class="bg-white p-3 rounded-xl border-2 border-emerald-600 shadow-xs">
+                <label class="block text-xs font-bold text-emerald-950 mb-1">เลขมิเตอร์ที่อ่านได้วันนี้ (ลบ.ม.) *</label>
+                <input type="number" step="0.1" id="waterCurrent" oninput="calculateWaterDiff()" class="w-full bg-white border-2 border-emerald-600 rounded-lg px-3 py-2 text-base font-mono font-extrabold text-emerald-950 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition shadow-inner" placeholder="กรอกตัวเลขหน้าปัด" required>
+                <span class="text-[10px] text-emerald-700 font-semibold block mt-1">ระบบจะคำนวณส่วนต่างอัตโนมัติ</span>
               </div>
             </div>
 
             <!-- Live Calculation Output Banner -->
-            <div id="waterDiffBox" class="hidden p-3 rounded-xl border flex items-center justify-between transition">
+            <div id="waterDiffBox" class="hidden p-3.5 rounded-xl border-2 flex items-center justify-between transition shadow-sm font-medium">
               <div class="flex items-center gap-2.5">
-                <div id="waterDiffIcon" class="w-7 h-7 rounded-lg flex items-center justify-center"></div>
+                <div id="waterDiffIcon" class="w-8 h-8 rounded-lg flex items-center justify-center border"></div>
                 <div>
-                  <div id="waterDiffLabel" class="text-xs font-medium"></div>
-                  <div id="waterDiffValue" class="text-base font-bold font-mono"></div>
+                  <div id="waterDiffLabel" class="text-xs font-bold"></div>
+                  <div id="waterDiffValue" class="text-lg font-extrabold font-mono"></div>
                 </div>
               </div>
-              <div id="waterStatusTag" class="text-xs font-medium px-2.5 py-1 rounded-md"></div>
+              <div id="waterStatusTag" class="text-xs font-bold px-3 py-1 rounded-lg border"></div>
             </div>
 
-            <!-- Water Quality Test in Water Supply -->
-            <div class="pt-2">
-              <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                <i data-lucide="sliders" class="w-3.5 h-3.5 text-emerald-600"></i> คุณภาพน้ำประปาหน้างาน (Water Quality Check)
-              </h3>
+            <!-- Water Quality Test in Water Supply with Distinct Frame -->
+            <div class="bg-teal-50/40 p-4 rounded-2xl border-2 border-teal-600 space-y-3 shadow-xs">
+              <div class="flex items-center justify-between pb-1.5 border-b-2 border-teal-600/30">
+                <h3 class="text-xs font-bold text-teal-950 uppercase tracking-wider flex items-center gap-2">
+                  <i data-lucide="sliders" class="w-4 h-4 text-teal-700"></i> คุณภาพน้ำประปาหน้างาน (Water Quality Check)
+                </h3>
+                <span class="text-[11px] bg-teal-100 text-teal-900 font-bold px-2.5 py-0.5 rounded-full border border-teal-400">
+                  ตรวจประจำวัน
+                </span>
+              </div>
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div>
-                  <label class="block text-[11px] font-medium text-slate-600 mb-1">คลอรีนอิสระคงเหลือ (mg/L)</label>
-                  <input type="number" step="0.05" id="waterChlorine" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white" placeholder="เกณฑ์ 0.2 - 0.5" value="0.35">
+                <div class="bg-white p-2.5 rounded-xl border-2 border-slate-300">
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">คลอรีนอิสระคงเหลือ (mg/L)</label>
+                  <input type="number" step="0.05" id="waterChlorine" class="w-full bg-white border-2 border-slate-600 rounded-lg px-3 py-1.5 text-sm font-mono font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="เกณฑ์ 0.2 - 0.5" value="0.35">
+                  <span class="text-[10px] text-slate-500 mt-0.5 block">เกณฑ์มาตรฐาน 0.2 - 0.5</span>
                 </div>
-                <div>
-                  <label class="block text-[11px] font-medium text-slate-600 mb-1">ค่าความเป็นกรด-ด่าง (pH)</label>
-                  <input type="number" step="0.1" id="waterPh" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white" placeholder="เกณฑ์ 6.5 - 8.5" value="7.2">
+                <div class="bg-white p-2.5 rounded-xl border-2 border-slate-300">
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">ค่าความเป็นกรด-ด่าง (pH)</label>
+                  <input type="number" step="0.1" id="waterPh" class="w-full bg-white border-2 border-slate-600 rounded-lg px-3 py-1.5 text-sm font-mono font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="เกณฑ์ 6.5 - 8.5" value="7.2">
+                  <span class="text-[10px] text-slate-500 mt-0.5 block">เกณฑ์มาตรฐาน 6.5 - 8.5</span>
                 </div>
-                <div>
-                  <label class="block text-[11px] font-medium text-slate-600 mb-1">ความขุ่น (Turbidity: NTU)</label>
-                  <input type="number" step="0.1" id="waterTurbidity" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white" placeholder="ไม่เกิน 5 NTU" value="1.2">
+                <div class="bg-white p-2.5 rounded-xl border-2 border-slate-300">
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">ความขุ่น (Turbidity: NTU)</label>
+                  <input type="number" step="0.1" id="waterTurbidity" class="w-full bg-white border-2 border-slate-600 rounded-lg px-3 py-1.5 text-sm font-mono font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="ไม่เกิน 5 NTU" value="1.2">
+                  <span class="text-[10px] text-slate-500 mt-0.5 block">เกณฑ์ไม่เกิน 5.0 NTU</span>
                 </div>
               </div>
             </div>
 
-            <!-- Chemical Usage -->
-            <div class="bg-sky-50/70 p-3.5 rounded-xl border border-sky-200/90 space-y-2.5">
-              <div class="flex items-center justify-between">
+            <!-- Chemical Usage with Crisp Sky Frame -->
+            <div class="bg-sky-50/70 p-4 rounded-2xl border-2 border-sky-600 space-y-3 shadow-xs">
+              <div class="flex items-center justify-between pb-1.5 border-b-2 border-sky-600/30">
                 <div class="text-xs font-bold text-sky-950 flex items-center gap-1.5">
                   <i data-lucide="flask-conical" class="w-4 h-4 text-sky-700"></i> สารเคมีที่ใช้ในระบบผลิตน้ำประปา (บันทึกรายสัปดาห์)
                 </div>
-                <span class="text-[10px] bg-white text-sky-800 px-2 py-0.5 rounded-full font-semibold border border-sky-300">
+                <span class="text-[11px] bg-sky-100 text-sky-900 px-2.5 py-0.5 rounded-full font-bold border-2 border-sky-400">
                   รายสัปดาห์
                 </span>
               </div>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label class="block text-[11px] font-semibold text-slate-700 mb-1">ปริมาณสารส้มที่ใช้ (กิโลกรัม) *</label>
-                  <input type="number" step="0.5" id="waterAlumUsage" class="w-full bg-white border border-sky-300 rounded-lg px-3 py-2 text-sm font-mono text-slate-800 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="50.0">
+                <div class="bg-white p-3 rounded-xl border-2 border-sky-400 shadow-xs">
+                  <label class="block text-xs font-bold text-sky-950 mb-1">ปริมาณสารส้มที่ใช้ (กิโลกรัม) *</label>
+                  <input type="number" step="0.5" id="waterAlumUsage" class="w-full bg-white border-2 border-sky-600 rounded-lg px-3 py-2 text-base font-mono font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="50.0">
+                  <span class="text-[10px] text-sky-700 font-semibold mt-1 block">รอบเปลี่ยนสารส้มประจำสัปดาห์</span>
                 </div>
-                <div>
-                  <label class="block text-[11px] font-semibold text-slate-700 mb-1">ปริมาณคลอรีนระบบประปาที่ใช้ (กก. หรือ ลิตร) *</label>
-                  <input type="number" step="0.5" id="waterChlorineUsage" class="w-full bg-white border border-sky-300 rounded-lg px-3 py-2 text-sm font-mono text-slate-800 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="20.0">
+                <div class="bg-white p-3 rounded-xl border-2 border-sky-400 shadow-xs">
+                  <label class="block text-xs font-bold text-sky-950 mb-1">ปริมาณคลอรีนระบบประปาที่ใช้ (กก. หรือ ลิตร) *</label>
+                  <input type="number" step="0.5" id="waterChlorineUsage" class="w-full bg-white border-2 border-sky-600 rounded-lg px-3 py-2 text-base font-mono font-bold text-slate-900 focus:ring-2 focus:ring-sky-500 focus:outline-none" value="20.0">
+                  <span class="text-[10px] text-sky-700 font-semibold mt-1 block">คลอรีนฆ่าเชื้อในระบบผลิต</span>
                 </div>
               </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
               <div>
-                <label class="block text-xs font-semibold text-slate-600 mb-1.5">ผู้บันทึกข้อมูล</label>
-                <input type="text" id="waterRecorder" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm" value="นายจีรศักดิ์ นวลดี (นสต.ปก.)">
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">ผู้บันทึกข้อมูล *</label>
+                <input type="text" id="waterRecorder" class="w-full bg-slate-50 border-2 border-slate-700 rounded-xl px-3.5 py-2 text-sm font-semibold text-slate-900" value="นายจีรศักดิ์ นวลดี (นสต.ปก.)">
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-600 mb-1.5">หมายเหตุ / สภาพหน้าปัดมิเตอร์</label>
-                <input type="text" id="waterNote" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm" placeholder="เช่น ตัวเลขชัดเจน, ล้างถังกรองทราย">
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">หมายเหตุ / สภาพหน้าปัดมิเตอร์</label>
+                <input type="text" id="waterNote" class="w-full bg-slate-50 border-2 border-slate-700 rounded-xl px-3.5 py-2 text-sm font-medium text-slate-800" placeholder="เช่น ตัวเลขชัดเจน, ล้างถังกรองทราย">
               </div>
             </div>
 
             <div class="pt-2">
-              <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2">
-                <i data-lucide="save" class="w-4 h-4"></i>
+              <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 border-2 border-emerald-900 text-base active:scale-[0.99]">
+                <i data-lucide="save" class="w-5 h-5"></i>
                 <span>บันทึกข้อมูลมิเตอร์และประปา</span>
               </button>
             </div>
@@ -1062,22 +1150,22 @@
         </div>
 
         <div class="space-y-4">
-          <div class="bg-gradient-to-br from-sky-900 to-slate-800 text-white p-5 rounded-2xl shadow-sm">
-            <div class="flex items-center gap-2 text-sky-300 text-xs font-semibold mb-2">
-              <i data-lucide="info" class="w-4 h-4"></i> เกณฑ์มาตรฐานคุณภาพน้ำ
+          <div class="eco-float-card bg-gradient-to-br from-emerald-950 via-emerald-900 to-slate-900 text-white p-5 rounded-2xl shadow-lg border-2 border-emerald-500">
+            <div class="flex items-center gap-2 text-emerald-300 text-xs font-bold mb-2.5 pb-2 border-b-2 border-emerald-600/40">
+              <i data-lucide="info" class="w-4.5 h-4.5 text-emerald-400"></i> เกณฑ์มาตรฐานคุณภาพน้ำ
             </div>
-            <h3 class="font-bold text-base text-sky-50 mb-3">การควบคุมคุณภาพน้ำประปา รพ.</h3>
-            <ul class="space-y-2.5 text-xs text-sky-100/90 leading-relaxed">
-              <li class="flex items-start gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400 mt-0.5 flex-shrink-0"></i>
+            <h3 class="font-bold text-base text-emerald-50 mb-3">การควบคุมคุณภาพน้ำประปา รพ.</h3>
+            <ul class="space-y-2.5 text-xs text-emerald-100/95 leading-relaxed">
+              <li class="flex items-start gap-2.5 bg-emerald-900/60 p-2.5 rounded-xl border border-emerald-600/40">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0"></i>
                 <span><strong>คลอรีนคงเหลือปลายท่อ:</strong> $\ge 0.2$ mg/L ฆ่าเชื้อโรคตลอดสายท่อ</span>
               </li>
-              <li class="flex items-start gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400 mt-0.5 flex-shrink-0"></i>
-                <span><strong>ค่า pH มาตรฐาน:</strong> 6.5 - 8.5 ป้องกันการกัดกร่อน</span>
+              <li class="flex items-start gap-2.5 bg-emerald-900/60 p-2.5 rounded-xl border border-emerald-600/40">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0"></i>
+                <span><strong>ค่า pH มาตรฐาน:</strong> 6.5 - 8.5 ป้องกันการกัดกร่อนท่อ</span>
               </li>
-              <li class="flex items-start gap-2">
-                <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-amber-400 mt-0.5 flex-shrink-0"></i>
+              <li class="flex items-start gap-2.5 bg-rose-950/60 p-2.5 rounded-xl border border-rose-500/50">
+                <i data-lucide="alert-triangle" class="w-4 h-4 text-rose-400 mt-0.5 flex-shrink-0"></i>
                 <span><strong>เฝ้าระวังน้ำรั่ว:</strong> หากเกิน 170 ลบ.ม./วัน ให้สำรวจวาล์วใต้ดินทันที</span>
               </li>
             </ul>
@@ -1086,13 +1174,13 @@
       </div>
     </section>
 
-    <!-- TAB 2: Wastewater Treatment Section -->
+    <!-- TAB 2: Wastewater Treatment Section (with Floating Green Frame) -->
     <section id="pane-wwts" class="tab-pane hidden">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm">
-          <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+        <div class="lg:col-span-2 eco-float-card p-5 sm:p-6">
+          <div class="flex items-center justify-between pb-4 mb-4 border-b border-emerald-100">
             <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center">
+              <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-800 flex items-center justify-center border border-teal-200">
                 <i data-lucide="waves" class="w-5 h-5"></i>
               </div>
               <div>
@@ -1100,7 +1188,7 @@
                 <p class="text-xs text-slate-500">ระบบตะกอนเร่ง (Activated Sludge) / บ่อเติมอากาศ รพ.แม่อาย</p>
               </div>
             </div>
-            <span class="text-xs bg-teal-50 text-teal-700 font-medium px-2.5 py-1 rounded-lg border border-teal-200">
+            <span class="text-xs bg-teal-50 text-teal-800 font-semibold px-2.5 py-1 rounded-lg border border-teal-200">
               ควบคุมมลพิษ
             </span>
           </div>
@@ -1221,7 +1309,7 @@
         </div>
 
         <div class="space-y-4">
-          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+          <div class="eco-float-card p-5">
             <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">เกณฑ์มาตรฐานน้ำทิ้ง รพ.</h4>
             <div class="space-y-2 text-xs text-slate-600">
               <div class="flex justify-between py-1.5 border-b border-slate-100">
@@ -1242,13 +1330,13 @@
       </div>
     </section>
 
-    <!-- TAB 3: Waste Management Section -->
+    <!-- TAB 3: Waste Management Section (with Floating Green Frame) -->
     <section id="pane-waste" class="tab-pane hidden">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm">
-          <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+        <div class="lg:col-span-2 eco-float-card p-5 sm:p-6">
+          <div class="flex items-center justify-between pb-4 mb-4 border-b border-emerald-100">
             <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center border border-amber-200">
                 <i data-lucide="scale" class="w-5 h-5"></i>
               </div>
               <div>
@@ -1256,7 +1344,7 @@
                 <p class="text-xs text-slate-500">คัดแยกขยะตามเกณฑ์ GREEN & CLEAN Hospital และระเบียบ สธ.</p>
               </div>
             </div>
-            <span class="text-xs bg-amber-50 text-amber-800 font-medium px-2.5 py-1 rounded-lg border border-amber-200">
+            <span class="text-xs bg-amber-50 text-amber-800 font-semibold px-2.5 py-1 rounded-lg border border-amber-200">
               ชั่งน้ำหนักหน้างาน
             </span>
           </div>
@@ -1385,7 +1473,7 @@
         </div>
 
         <div class="space-y-4">
-          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+          <div class="eco-float-card p-5">
             <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">แนวทางกำจัดมูลฝอยติดเชื้อ & ขยะอันตราย</h4>
             <p class="text-xs text-slate-600 leading-relaxed mb-3">
               ตามระเบียบกระทรวงสาธารณสุข ต้องมีใบกำกับการขนส่งมูลฝอยติดเชื้อ (Manifest) ทุกครั้งที่บริษัทผู้รับกำจัดเข้ามาขนย้าย
@@ -1401,13 +1489,13 @@
       </div>
     </section>
 
-    <!-- TAB 4: OccHealth & Safety Section -->
+    <!-- TAB 4: OccHealth & Safety Section (with Floating Green Frame) -->
     <section id="pane-safety" class="tab-pane hidden">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm">
-          <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+        <div class="lg:col-span-2 eco-float-card p-5 sm:p-6">
+          <div class="flex items-center justify-between pb-4 mb-4 border-b border-emerald-100">
             <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center">
+              <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-800 flex items-center justify-center border border-rose-200">
                 <i data-lucide="shield-alert" class="w-5 h-5"></i>
               </div>
               <div>
@@ -1415,7 +1503,7 @@
                 <p class="text-xs text-slate-500">งานสิ่งแวดล้อม อาชีวอนามัย และความปลอดภัยบุคลากร รพ.แม่อาย</p>
               </div>
             </div>
-            <span class="text-xs bg-rose-50 text-rose-700 font-medium px-2.5 py-1 rounded-lg border border-rose-200">
+            <span class="text-xs bg-rose-50 text-rose-700 font-semibold px-2.5 py-1 rounded-lg border border-rose-200">
               Env & Safety Log
             </span>
           </div>
@@ -1481,7 +1569,7 @@
         </div>
 
         <div class="space-y-4">
-          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+          <div class="eco-float-card p-5">
             <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">ขั้นตอนกรณีเข็มตำ (Needle Stick Protocol)</h4>
             <ol class="space-y-2 text-xs text-slate-600 list-decimal list-inside leading-relaxed">
               <li><strong>บีบเลือดและล้างแผล</strong> ด้วยสบู่และน้ำสะอาดทันทีอย่างน้อย 5 นาที</li>
@@ -1494,13 +1582,13 @@
       </div>
     </section>
 
-    <!-- TAB 5: Maintenance & CAPA Section -->
+    <!-- TAB 5: Maintenance & CAPA Section (with Floating Green Frame) -->
     <section id="pane-maintenance" class="tab-pane hidden">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm">
-          <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+        <div class="lg:col-span-2 eco-float-card p-5 sm:p-6">
+          <div class="flex items-center justify-between pb-4 mb-4 border-b border-emerald-100">
             <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
+              <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-800 flex items-center justify-center border border-indigo-200">
                 <i data-lucide="wrench" class="w-5 h-5"></i>
               </div>
               <div>
@@ -1508,7 +1596,7 @@
                 <p class="text-xs text-slate-500">บันทึกผลการปฏิบัติงาน การแก้ปัญหาหน้างาน และแนวทางป้องกันการเกิดซ้ำ (CAPA)</p>
               </div>
             </div>
-            <span class="text-xs bg-indigo-50 text-indigo-700 font-medium px-2.5 py-1 rounded-lg border border-indigo-200">
+            <span class="text-xs bg-indigo-50 text-indigo-700 font-semibold px-2.5 py-1 rounded-lg border border-indigo-200">
               รายงานการปฏิบัติงาน
             </span>
           </div>
@@ -1591,7 +1679,7 @@
         </div>
 
         <div class="space-y-4">
-          <div class="bg-gradient-to-br from-indigo-900 to-slate-800 text-white p-5 rounded-2xl shadow-sm">
+          <div class="eco-float-card bg-gradient-to-br from-indigo-950 via-indigo-900 to-slate-900 text-white p-5 rounded-2xl shadow-md border border-indigo-600/30">
             <div class="flex items-center gap-2 text-indigo-300 text-xs font-semibold mb-2">
               <i data-lucide="clipboard-check" class="w-4 h-4"></i> ประโยชน์ของบันทึกงานซ่อม
             </div>
@@ -1611,19 +1699,19 @@
       </div>
     </section>
 
-    <!-- TAB 6: History & Export Section -->
+    <!-- TAB 6: History & Export Section (with Floating Green Frame) -->
     <section id="pane-history" class="tab-pane hidden">
-      <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-100">
+      <div class="eco-float-card p-5 sm:p-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-emerald-100">
           <div>
             <h2 class="font-semibold text-slate-800 text-base sm:text-lg">ประวัติการบันทึกข้อมูลล่าสุด (Data Records)</h2>
             <p class="text-xs text-slate-500">ข้อมูลที่บันทึกผ่านระบบจะถูกเก็บไว้ในฐานข้อมูลและสามารถส่งออกได้</p>
           </div>
           <div class="flex items-center gap-2">
-            <button onclick="clearHistoryData()" class="text-xs text-rose-600 hover:text-rose-700 px-3 py-1.5 rounded-lg border border-rose-200 hover:bg-rose-50 transition">
+            <button onclick="clearHistoryData()" class="text-xs text-rose-600 hover:text-rose-700 px-3 py-1.5 rounded-lg border border-rose-200 hover:bg-rose-50 transition font-medium">
               ล้างข้อมูลทดสอบ
             </button>
-            <button onclick="exportToCSV()" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-3 py-1.5 rounded-lg shadow-sm transition flex items-center gap-1.5">
+            <button onclick="exportToCSV()" class="text-xs bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-3.5 py-1.5 rounded-lg shadow-sm transition flex items-center gap-1.5">
               <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i> ส่งออก Excel / CSV
             </button>
           </div>
@@ -1631,7 +1719,7 @@
 
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs text-slate-700">
-            <thead class="bg-slate-50 text-slate-500 font-semibold border-y border-slate-200">
+            <thead class="bg-emerald-50/70 text-emerald-950 font-semibold border-y border-emerald-200">
               <tr>
                 <th class="py-3 px-3">เวลา / วันที่</th>
                 <th class="py-3 px-3">หมวดงาน</th>
@@ -1649,17 +1737,17 @@
       </div>
     </section>
 
-    <!-- TAB 7: Form TS.2 (แบบ ทส. ๒) PCD Report -->
+    <!-- TAB 7: Form TS.2 PCD Report (with Floating Green Frame) -->
     <section id="pane-ts2" class="tab-pane hidden space-y-6">
       
-      <div class="bg-white p-5 sm:p-6 rounded-2xl border border-teal-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div class="eco-float-card p-5 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div class="flex items-center gap-2 mb-1">
-            <span class="bg-teal-100 text-teal-800 text-xs px-2.5 py-0.5 rounded-full font-bold border border-teal-200">แบบ ทส. ๒</span>
+            <span class="bg-emerald-100 text-emerald-900 text-xs px-2.5 py-0.5 rounded-full font-bold border border-emerald-200">แบบ ทส. ๒</span>
             <span class="bg-slate-100 text-slate-700 text-xs px-2 py-0.5 rounded-md font-medium">ม.๘๐ พ.ร.บ.สิ่งแวดล้อมฯ ๒๕๓๕</span>
           </div>
           <h2 class="text-base sm:text-lg font-bold text-slate-800 flex items-center gap-2">
-            <i data-lucide="file-check-2" class="w-5 h-5 text-teal-600"></i>
+            <i data-lucide="file-check-2" class="w-5 h-5 text-emerald-600"></i>
             รายงานสรุปผลการทำงานของระบบบำบัดน้ำเสียประจำเดือน (ทส.๒)
           </h2>
           <p class="text-xs text-slate-500 mt-0.5">
@@ -1670,7 +1758,7 @@
         <div class="flex flex-wrap items-center gap-2 self-stretch md:self-auto">
           <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200">
             <label class="text-xs text-slate-600 font-medium pl-2">รอบเดือน:</label>
-            <select id="ts2MonthSelect" onchange="updateTs2Report()" class="bg-white text-xs font-semibold text-teal-800 rounded-lg px-2.5 py-1.5 border border-slate-300 focus:outline-none">
+            <select id="ts2MonthSelect" onchange="updateTs2Report()" class="bg-white text-xs font-semibold text-emerald-800 rounded-lg px-2.5 py-1.5 border border-slate-300 focus:outline-none">
               <option value="2026-09" selected>กันยายน ๒๕๖๙</option>
               <option value="2026-10">ตุลาคม ๒๕๖๙</option>
               <option value="2026-11">พฤศจิกายน ๒๕๖๙</option>
@@ -1678,7 +1766,7 @@
             </select>
           </div>
 
-          <button onclick="copyFullTs2Text()" class="inline-flex items-center gap-1.5 bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold px-3 py-2 rounded-xl shadow-sm transition active:scale-95">
+          <button onclick="copyFullTs2Text()" class="inline-flex items-center gap-1.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold px-3 py-2 rounded-xl shadow-sm transition active:scale-95">
             <i data-lucide="copy" class="w-3.5 h-3.5"></i>
             <span>คัดลอกสรุปเพื่อกรอกเว็บ คพ.</span>
           </button>
@@ -1690,47 +1778,47 @@
         </div>
       </div>
 
-      <!-- Printable Form Structure (แบบ ทส. ๒) -->
-      <div id="ts2PrintArea" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm space-y-6">
-        <div class="text-center border-b border-slate-200 pb-5">
-          <div class="inline-block bg-teal-50 text-teal-800 text-xs px-3 py-1 rounded-full font-bold border border-teal-200 mb-2">
+      <!-- Printable Form Structure (แบบ ทส. ๒) with Floating Frame -->
+      <div id="ts2PrintArea" class="eco-float-card p-6 sm:p-8 space-y-6">
+        <div class="text-center border-b border-emerald-100 pb-5">
+          <div class="inline-block bg-emerald-50 text-emerald-900 text-xs px-3 py-1 rounded-full font-bold border border-emerald-200 mb-2">
             แบบ ทส. ๒ (แบบรายงานสรุปผลการทำงานของระบบบำบัดน้ำเสียประจำเดือน)
           </div>
           <h1 class="text-lg sm:text-xl font-bold text-slate-800">
             รายงานสรุปผลการทำงานของระบบบำบัดน้ำเสีย โรงพยาบาลแม่อาย
           </h1>
           <p class="text-xs text-slate-500 mt-1">
-            ตามมาตรา ๘๐ แห่งพระราชบัญญัติส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. ๒๕๓๕ • ประจำเดือน <span id="ts2HeaderMonth" class="font-bold text-teal-800">กันยายน ๒๕๖๙</span>
+            ตามมาตรา ๘๐ แห่งพระราชบัญญัติส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. ๒๕๓๕ • ประจำเดือน <span id="ts2HeaderMonth" class="font-bold text-emerald-800">กันยายน ๒๕๖๙</span>
           </p>
         </div>
 
         <!-- Section 1: Facility Profile -->
         <div class="space-y-3">
-          <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider flex items-center gap-2 pb-1 border-b border-slate-100">
-            <i data-lucide="building-2" class="w-4 h-4 text-teal-600"></i> ส่วนที่ ๑ : ข้อมูลทั่วไปของแหล่งกำเนิดมลพิษ
+          <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider flex items-center gap-2 pb-1 border-b border-emerald-100">
+            <i data-lucide="building-2" class="w-4 h-4 text-emerald-600"></i> ส่วนที่ ๑ : ข้อมูลทั่วไปของแหล่งกำเนิดมลพิษ
           </h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+            <div class="p-3 bg-emerald-50/40 rounded-xl border border-emerald-200/60">
               <span class="text-slate-500 block text-[11px]">ชื่อสถานบริการ / แหล่งกำเนิด:</span>
               <strong class="text-slate-800 text-sm">โรงพยาบาลแม่อาย</strong>
             </div>
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+            <div class="p-3 bg-emerald-50/40 rounded-xl border border-emerald-200/60">
               <span class="text-slate-500 block text-[11px]">ประเภทแหล่งกำเนิดมลพิษ:</span>
               <strong class="text-slate-800 text-sm">โรงพยาบาล ประเภทย่อย ประเภท ก ตั้งแต่ 30 เตียงขึ้นไป</strong>
             </div>
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+            <div class="p-3 bg-emerald-50/40 rounded-xl border border-emerald-200/60">
               <span class="text-slate-500 block text-[11px]">สถานที่ตั้ง & หมายเลขโทรศัพท์:</span>
               <span class="text-slate-800 font-medium">๑๙๑ หมู่ ๘ ต.มะลิกา อ.แม่อาย จ.เชียงใหม่ ๕๐๒๘๐ โทร ๐๕๓-๔๕๙๐๓๖</span>
             </div>
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+            <div class="p-3 bg-emerald-50/40 rounded-xl border border-emerald-200/60">
               <span class="text-slate-500 block text-[11px]">ระบบบำบัดน้ำเสียที่ใช้:</span>
-              <strong class="text-teal-800">ระบบตะกอนเร่ง (Activated Sludge : AS) บ่อเติมอากาศ</strong>
+              <strong class="text-emerald-900">ระบบตะกอนเร่ง (Activated Sludge : AS) บ่อเติมอากาศ</strong>
             </div>
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+            <div class="p-3 bg-emerald-50/40 rounded-xl border border-emerald-200/60">
               <span class="text-slate-500 block text-[11px]">อัตราการสูบน้ำเสียเข้าบำบัด:</span>
-              <strong class="text-teal-800 font-mono">๑๕.๙๗๕ ลูกบาศก์เมตรต่อชั่วโมง</strong>
+              <strong class="text-emerald-900 font-mono">๑๕.๙๗๕ ลูกบาศก์เมตรต่อชั่วโมง</strong>
             </div>
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
+            <div class="p-3 bg-emerald-50/40 rounded-xl border border-emerald-200/60">
               <span class="text-slate-500 block text-[11px]">ผู้ควบคุมระบบ / ผู้จัดทำรายงาน:</span>
               <strong class="text-slate-800">นายจีรศักดิ์ นวลดี (นักสาธารณสุขปฏิบัติการ)</strong>
             </div>
