@@ -509,6 +509,34 @@
               </div>
             </div>
 
+            <!-- Water Treatment Chemical Usage (Alum & Chlorine - Weekly Log) -->
+            <div class="bg-sky-50/70 p-3.5 rounded-xl border border-sky-200/90 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <div class="text-xs font-bold text-sky-950 flex items-center gap-1.5">
+                  <i data-lucide="flask-conical" class="w-4 h-4 text-sky-700"></i> สารเคมีที่ใช้ในระบบผลิตน้ำประปา (บันทึกรายสัปดาห์ / ตามรอบเติม)
+                </div>
+                <span class="text-[10px] bg-white text-sky-800 px-2 py-0.5 rounded-full font-semibold border border-sky-300">
+                  รายสัปดาห์
+                </span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-700 mb-1">
+                    ปริมาณสารส้มที่ใช้ (กิโลกรัม) *
+                  </label>
+                  <input type="number" step="0.5" id="waterAlumUsage" class="w-full bg-white border border-sky-300 rounded-lg px-3 py-2 text-sm font-mono text-slate-800 focus:ring-2 focus:ring-sky-500 focus:outline-none" placeholder="เช่น 50.0" value="50.0">
+                  <span class="text-[10px] text-sky-700 mt-0.5 block">ใช้สร้างตะกอนในถังตกตะกอน</span>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-slate-700 mb-1">
+                    ปริมาณคลอรีนระบบประปาที่ใช้ (กก. หรือ ลิตร) *
+                  </label>
+                  <input type="number" step="0.5" id="waterChlorineUsage" class="w-full bg-white border border-sky-300 rounded-lg px-3 py-2 text-sm font-mono text-slate-800 focus:ring-2 focus:ring-sky-500 focus:outline-none" placeholder="เช่น 20.0" value="20.0">
+                  <span class="text-[10px] text-sky-700 mt-0.5 block">สารละลายคลอรีนฆ่าเชื้อน้ำประปา</span>
+                </div>
+              </div>
+            </div>
+
             <!-- Note & Profile -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
               <div>
@@ -663,6 +691,52 @@
               </div>
             </div>
 
+            <!-- Electricity Meter of Wastewater Treatment System (kWh / Units for Form TS.2) -->
+            <div class="bg-amber-50/60 p-4 rounded-xl border border-amber-200 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="font-semibold text-xs text-amber-950 flex items-center gap-1.5">
+                  <i data-lucide="zap" class="w-4 h-4 text-amber-600"></i> บันทึกเลขมิเตอร์ไฟฟ้าของระบบบำบัดน้ำเสีย (สำหรับรายงาน ทส.๒)
+                </div>
+                <span class="text-[11px] bg-white text-amber-800 px-2.5 py-0.5 rounded-full font-semibold border border-amber-300 shadow-sm">
+                  หน่วย (kWh)
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-1">เลขมิเตอร์ไฟฟ้าครั้งก่อน (หน่วย)</label>
+                  <input type="number" step="0.1" id="wwtsElectricPrev" class="w-full bg-slate-200/80 border border-slate-300 rounded-lg px-3 py-2 text-sm font-mono text-slate-700 cursor-not-allowed" readonly value="8540.0">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-amber-900 mb-1">เลขมิเตอร์ไฟฟ้าที่อ่านได้วันนี้ (หน่วย) *</label>
+                  <input type="number" step="0.1" id="wwtsElectricToday" oninput="calculateWwtsElectricity()" class="w-full bg-white border-2 border-amber-400 rounded-lg px-3 py-2 text-sm font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500 transition" placeholder="กรอกเลขมิเตอร์ไฟหน้าตู้" required>
+                </div>
+              </div>
+
+              <!-- Live Electricity Diff Banner -->
+              <div id="wwtsElectricBox" class="hidden p-3 rounded-xl border flex items-center justify-between bg-amber-50 border-amber-200 text-amber-900">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="activity" class="w-4 h-4 text-amber-600"></i>
+                  <span class="text-xs font-medium">ปริมาณการใช้ไฟฟ้าวันนี้:</span>
+                </div>
+                <span id="wwtsElectricVal" class="font-mono font-bold text-base text-amber-900">0 หน่วย</span>
+              </div>
+            </div>
+
+            <!-- WWTS Chemical Usage (Weekly Chlorine) -->
+            <div class="bg-teal-50/50 p-3.5 rounded-xl border border-teal-200/80">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-xs font-bold text-teal-950 flex items-center gap-1.5">
+                  <i data-lucide="droplet" class="w-3.5 h-3.5 text-teal-700"></i> ปริมาณคลอรีนที่ใช้ฆ่าเชื้อน้ำเสีย (ลิตร/สัปดาห์) *
+                </label>
+                <span class="text-[10px] text-teal-700 font-medium">บันทึกรวมรายสัปดาห์</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input type="number" step="1" id="wwtsChlorineWeeklyUsage" class="w-full bg-white border border-teal-300 rounded-lg px-3 py-2 text-sm font-mono text-slate-800 focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="เช่น 15 ลิตร/สัปดาห์" value="15">
+                <span class="text-[11px] text-slate-500 flex items-center">สารละลายคลอรีน 10% สำหรับบ่อสัมผัสคลอรีน</span>
+              </div>
+            </div>
+
             <!-- Aeration Parameters -->
             <div class="bg-slate-50/80 p-4 rounded-xl border border-slate-200 space-y-3">
               <div class="font-semibold text-xs text-slate-800 flex items-center gap-1.5">
@@ -801,63 +875,127 @@
               </div>
             </div>
 
-            <!-- 5 Waste Inputs -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-1">
-              <!-- General -->
-              <div class="bg-blue-50/60 p-3 rounded-xl border border-blue-200">
-                <div class="text-xs font-bold text-blue-900 mb-1 flex items-center gap-1">
-                  <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> ขยะทั่วไป
+            <!-- General Waste Categories -->
+            <div>
+              <span class="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-2">๑. ขยะมูลฝอยทั่วไปและขยะอันตรายทั่วไป</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <!-- General -->
+                <div class="bg-blue-50/60 p-3 rounded-xl border border-blue-200">
+                  <div class="text-xs font-bold text-blue-900 mb-1 flex items-center gap-1">
+                    <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> ขยะทั่วไป
+                  </div>
+                  <input type="number" step="0.1" id="wGeneral" oninput="calcWasteTotal()" class="w-full bg-white border border-blue-300 rounded-lg p-2 text-sm font-mono font-bold" placeholder="0.0" value="45.5">
+                  <span class="text-[10px] text-blue-700 mt-1 block">หน่วย: กก.</span>
                 </div>
-                <input type="number" step="0.1" id="wGeneral" oninput="calcWasteTotal()" class="w-full bg-white border border-blue-300 rounded-lg p-2 text-sm font-mono font-bold" placeholder="0.0" value="45.5">
-                <span class="text-[10px] text-blue-700 mt-1 block">หน่วย: กก.</span>
-              </div>
 
-              <!-- Recyclable -->
-              <div class="bg-emerald-50/60 p-3 rounded-xl border border-emerald-200">
-                <div class="text-xs font-bold text-emerald-900 mb-1 flex items-center gap-1">
-                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> รีไซเคิล
+                <!-- Recyclable -->
+                <div class="bg-emerald-50/60 p-3 rounded-xl border border-emerald-200">
+                  <div class="text-xs font-bold text-emerald-900 mb-1 flex items-center gap-1">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> รีไซเคิล
+                  </div>
+                  <input type="number" step="0.1" id="wRecycle" oninput="calcWasteTotal()" class="w-full bg-white border border-emerald-300 rounded-lg p-2 text-sm font-mono font-bold" placeholder="0.0" value="18.2">
+                  <span class="text-[10px] text-emerald-700 mt-1 block">หน่วย: กก.</span>
                 </div>
-                <input type="number" step="0.1" id="wRecycle" oninput="calcWasteTotal()" class="w-full bg-white border border-emerald-300 rounded-lg p-2 text-sm font-mono font-bold" placeholder="0.0" value="18.2">
-                <span class="text-[10px] text-emerald-700 mt-1 block">หน่วย: กก.</span>
-              </div>
 
-              <!-- Organic -->
-              <div class="bg-green-50/60 p-3 rounded-xl border border-green-200">
-                <div class="text-xs font-bold text-green-900 mb-1 flex items-center gap-1">
-                  <span class="w-2.5 h-2.5 rounded-full bg-green-600"></span> อินทรีย์/อาหาร
+                <!-- Organic -->
+                <div class="bg-green-50/60 p-3 rounded-xl border border-green-200">
+                  <div class="text-xs font-bold text-green-900 mb-1 flex items-center gap-1">
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-600"></span> อินทรีย์/เศษอาหาร
+                  </div>
+                  <input type="number" step="0.1" id="wOrganic" oninput="calcWasteTotal()" class="w-full bg-white border border-green-300 rounded-lg p-2 text-sm font-mono font-bold" placeholder="0.0" value="24.0">
+                  <span class="text-[10px] text-green-700 mt-1 block">หน่วย: กก.</span>
                 </div>
-                <input type="number" step="0.1" id="wOrganic" oninput="calcWasteTotal()" class="w-full bg-white border border-green-300 rounded-lg p-2 text-sm font-mono font-bold" placeholder="0.0" value="24.0">
-                <span class="text-[10px] text-green-700 mt-1 block">หน่วย: กก.</span>
-              </div>
 
-              <!-- Hazardous -->
-              <div class="bg-amber-50/80 p-3 rounded-xl border border-amber-300">
-                <div class="text-xs font-bold text-amber-900 mb-1 flex items-center gap-1">
-                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> ขยะอันตราย *
+                <!-- Hazardous General -->
+                <div class="bg-amber-50/80 p-3 rounded-xl border border-amber-300">
+                  <div class="text-xs font-bold text-amber-900 mb-1 flex items-center gap-1">
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> ขยะอันตรายทั่วไป *
+                  </div>
+                  <input type="number" step="0.1" id="wHazardous" oninput="calcWasteTotal()" class="w-full bg-white border border-amber-400 rounded-lg p-2 text-sm font-mono font-bold text-amber-800" placeholder="0.0" value="3.2" required>
+                  <span class="text-[10px] text-amber-800 mt-1 block">หลอดไฟ/เคมี/ถ่าน</span>
                 </div>
-                <input type="number" step="0.1" id="wHazardous" oninput="calcWasteTotal()" class="w-full bg-white border border-amber-400 rounded-lg p-2 text-sm font-mono font-bold text-amber-800" placeholder="0.0" value="3.2" required>
-                <span class="text-[10px] text-amber-800 mt-1 block">หลอดไฟ/เคมี/ถ่าน</span>
-              </div>
-
-              <!-- Infectious -->
-              <div class="bg-rose-50/60 p-3 rounded-xl border border-rose-200">
-                <div class="text-xs font-bold text-rose-900 mb-1 flex items-center gap-1">
-                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> ขยะติดเชื้อ *
-                </div>
-                <input type="number" step="0.1" id="wInfectious" oninput="calcWasteTotal()" class="w-full bg-white border border-rose-400 rounded-lg p-2 text-sm font-mono font-bold text-rose-700" placeholder="0.0" value="19.4" required>
-                <span class="text-[10px] text-rose-700 mt-1 block">หน่วย: กก.</span>
               </div>
             </div>
 
-            <!-- Total Bar -->
-            <div class="p-3.5 bg-slate-100 rounded-xl flex items-center justify-between">
-              <span class="text-xs font-semibold text-slate-700">น้ำหนักขยะรวมทั้งหมด 5 ประเภทวันนี้:</span>
-              <span id="wasteTotalDisplay" class="text-lg font-bold font-mono text-emerald-800">110.3 กก.</span>
+            <!-- Infectious Waste: Mae Ai Hospital Internal Breakdown -->
+            <div class="bg-rose-50/70 p-3.5 rounded-2xl border border-rose-200 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-rose-950 flex items-center gap-1.5">
+                  <i data-lucide="biohazard" class="w-4 h-4 text-rose-600"></i> ๒. ขยะติดเชื้อของโรงพยาบาลแม่อาย (แยกประเภท)
+                </span>
+                <span class="text-[10px] bg-white text-rose-800 px-2 py-0.5 rounded-full font-semibold border border-rose-300">
+                  รพ.แม่อาย
+                </span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="bg-white p-2.5 rounded-xl border border-rose-200">
+                  <label class="block text-xs font-semibold text-rose-900 mb-1">
+                    ขยะติดเชื้อทั่วไป (รพ.แม่อาย) *
+                  </label>
+                  <input type="number" step="0.1" id="wInfHospGeneral" oninput="calcWasteTotal()" class="w-full bg-rose-50/40 border border-rose-300 rounded-lg p-2 text-sm font-mono font-bold text-rose-800" placeholder="0.0" value="15.8" required>
+                  <span class="text-[10px] text-slate-500 mt-1 block">ผ้าก๊อซ, สำลี, ถุงมือ, ชุดตรวจ</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-xl border border-rose-200">
+                  <label class="block text-xs font-semibold text-rose-900 mb-1">
+                    ขยะติดเชื้ออันตราย / ไซโตท็อกซิก (รพ.แม่อาย) *
+                  </label>
+                  <input type="number" step="0.1" id="wInfHospHazardous" oninput="calcWasteTotal()" class="w-full bg-rose-50/40 border border-rose-300 rounded-lg p-2 text-sm font-mono font-bold text-rose-800" placeholder="0.0" value="3.6" required>
+                  <span class="text-[10px] text-slate-500 mt-1 block">เข็ม/ของมีคม, ยาเคมีบำบัด Cytotoxic</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- External Deposited Infectious Waste (รพ.สต. / ศสม. / คลินิกเครือข่าย) -->
+            <div class="bg-purple-50/70 p-3.5 rounded-2xl border border-purple-200 space-y-2.5">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                <span class="text-xs font-bold text-purple-950 flex items-center gap-1.5">
+                  <i data-lucide="building" class="w-4 h-4 text-purple-700"></i> ๓. ขยะติดเชื้อรับฝากจากแหล่งอื่น (รพ.สต. / เครือข่าย)
+                </span>
+                <span class="text-[10px] bg-white text-purple-800 px-2 py-0.5 rounded-full font-semibold border border-purple-300 self-start sm:self-auto">
+                  ขยะรับฝาก
+                </span>
+              </div>
+              
+              <!-- Source Selection -->
+              <div>
+                <label class="block text-[11px] font-semibold text-purple-900 mb-1">หน่วยงานที่นำมาฝากส่งกำจัด (เช่น รพ.สต.)</label>
+                <input type="text" id="wInfExtSource" class="w-full bg-white border border-purple-300 rounded-lg px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-purple-500" placeholder="เช่น รพ.สต.บ้านมะลิกา, รพ.สต.ท่าตอน, รพ.สต.แม่สาว" value="รพ.สต.บ้านมะลิกา">
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="bg-white p-2.5 rounded-xl border border-purple-200">
+                  <label class="block text-xs font-semibold text-purple-900 mb-1">
+                    ขยะติดเชื้อทั่วไป (รับฝาก)
+                  </label>
+                  <input type="number" step="0.1" id="wInfExtGeneral" oninput="calcWasteTotal()" class="w-full bg-purple-50/40 border border-purple-300 rounded-lg p-2 text-sm font-mono font-bold text-purple-800" placeholder="0.0" value="8.4">
+                  <span class="text-[10px] text-purple-700 mt-1 block">หน่วย: กก.</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-xl border border-purple-200">
+                  <label class="block text-xs font-semibold text-purple-900 mb-1">
+                    ขยะติดเชื้ออันตราย / ของมีคม (รับฝาก)
+                  </label>
+                  <input type="number" step="0.1" id="wInfExtHazardous" oninput="calcWasteTotal()" class="w-full bg-purple-50/40 border border-purple-300 rounded-lg p-2 text-sm font-mono font-bold text-purple-800" placeholder="0.0" value="1.8">
+                  <span class="text-[10px] text-purple-700 mt-1 block">หน่วย: กก.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Granular Waste Breakdown Summary Bar -->
+            <div class="p-3.5 bg-slate-100 rounded-2xl border border-slate-200 space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2 text-xs border-b border-slate-200/80 pb-2">
+                <span class="text-slate-600">ขยะติดเชื้อ รพ.แม่อาย: <strong id="wasteHospInfDisplay" class="text-rose-700 font-mono font-bold">19.4 กก.</strong></span>
+                <span class="text-slate-600">ขยะติดเชื้อรับฝาก (รพ.สต.): <strong id="wasteExtInfDisplay" class="text-purple-700 font-mono font-bold">10.2 กก.</strong></span>
+                <span class="text-slate-700 font-medium">รวมขยะติดเชื้อทั้งหมด: <strong id="wasteTotalInfDisplay" class="text-rose-800 font-mono font-bold">29.6 กก.</strong></span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-800">น้ำหนักขยะทุกประเภทวันนี้ (รวมรับฝาก):</span>
+                <span id="wasteTotalDisplay" class="text-lg font-bold font-mono text-emerald-800">120.5 กก.</span>
+              </div>
             </div>
 
             <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2">
               <i data-lucide="save" class="w-4 h-4"></i>
-              <span>บันทึกปริมาณขยะมูลฝอย</span>
+              <span>บันทึกปริมาณขยะมูลฝอย (รวมยอด รพ. & รพ.สต.)</span>
             </button>
           </form>
         </div>
@@ -1234,7 +1372,7 @@
           </p>
         </div>
 
-        <!-- Section 1: Facility Profile -->
+        <!-- Section 1: Facility Profile (Updated with Official Hospital Category A ≥30 Beds and Address) -->
         <div class="space-y-3">
           <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider flex items-center gap-2 pb-1 border-b border-slate-100">
             <i data-lucide="building-2" class="w-4 h-4 text-teal-600"></i> ส่วนที่ ๑ : ข้อมูลทั่วไปของแหล่งกำเนิดมลพิษ
@@ -1246,11 +1384,11 @@
             </div>
             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
               <span class="text-slate-500 block text-[11px]">ประเภทแหล่งกำเนิดมลพิษ:</span>
-              <strong class="text-slate-800 text-sm">สถานพยาบาลของทางราชการ (โรงพยาบาลชุมชน)</strong>
+              <strong class="text-slate-800 text-sm">โรงพยาบาล ประเภทย่อย ประเภท ก ตั้งแต่ 30 เตียงขึ้นไป</strong>
             </div>
             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
-              <span class="text-slate-500 block text-[11px]">สถานที่ตั้ง:</span>
-              <span class="text-slate-800 font-medium">๑๔๔ หมู่ ๕ ต.มะลิกา อ.แม่อาย จ.เชียงใหม่ ๕๐๒๘๐</span>
+              <span class="text-slate-500 block text-[11px]">สถานที่ตั้ง & หมายเลขโทรศัพท์:</span>
+              <span class="text-slate-800 font-medium">๑๙๑ หมู่ ๘ ต.มะลิกา อ.แม่อาย จ.เชียงใหม่ ๕๐๒๘๐ โทร ๐๕๓-๔๕๙๐๓๖</span>
             </div>
             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80">
               <span class="text-slate-500 block text-[11px]">ระบบบำบัดน้ำเสียที่ใช้:</span>
@@ -1267,54 +1405,64 @@
           </div>
         </div>
 
-        <!-- Section 2: Water & Wastewater Inflow Summary (The Core of ทส.2) -->
+        <!-- Section 2: Water, Wastewater & Electricity Summary (Core of ทส.2) -->
         <div class="space-y-3">
           <div class="flex items-center justify-between pb-1 border-b border-slate-100">
             <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider flex items-center gap-2">
-              <i data-lucide="waves" class="w-4 h-4 text-teal-600"></i> ส่วนที่ ๒ : สรุปปริมาณน้ำประปาที่ใช้และปริมาณน้ำเสียที่เข้าระบบบำบัด
+              <i data-lucide="waves" class="w-4 h-4 text-teal-600"></i> ส่วนที่ ๒ : สรุปปริมาณน้ำใช้, น้ำเสียเข้าระบบ และการใช้กระแสไฟฟ้า (ทส.๒)
             </h3>
-            <span class="text-[11px] text-teal-700 font-medium">คำนวณจากชั่วโมงปั๊มสูบจริง x ๑๕.๙๗๕ ลบ.ม./ชม.</span>
+            <span class="text-[11px] text-teal-700 font-medium">คำนวณจากชั่วโมงปั๊มจริง x ๑๕.๙๗๕ ลบ.ม./ชม.</span>
           </div>
 
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <div class="grid grid-cols-2 lg:grid-cols-5 gap-3">
             <!-- Metric 1: Monthly Total Water Used -->
-            <div class="p-4 bg-sky-50/60 rounded-2xl border border-sky-200/80">
+            <div class="p-3.5 bg-sky-50/60 rounded-2xl border border-sky-200/80">
               <div class="text-xs text-sky-800 font-medium mb-1 flex items-center justify-between">
-                <span>ปริมาณน้ำประปาที่ใช้รวม</span>
+                <span>น้ำประปาที่ใช้รวม</span>
                 <button onclick="copySpecificValue('ts2WaterTotal', 'น้ำประปาที่ใช้รวม')" class="text-sky-600 hover:text-sky-800"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
               </div>
-              <div class="text-xl sm:text-2xl font-bold text-sky-900 font-mono" id="ts2WaterTotal">๔,๒๗๕.๐</div>
-              <div class="text-[11px] text-sky-700 mt-0.5">ลบ.ม./เดือน (เฉลี่ย <span id="ts2WaterAvg" class="font-semibold">๑๔๒.๕</span> ลบ.ม./วัน)</div>
+              <div class="text-lg sm:text-xl font-bold text-sky-900 font-mono" id="ts2WaterTotal">๔,๒๗๕.๐</div>
+              <div class="text-[10px] text-sky-700 mt-0.5">ลบ.ม./เดือน (เฉลี่ย <span id="ts2WaterAvg" class="font-semibold">๑๔๒.๕</span>/วัน)</div>
             </div>
 
             <!-- Metric 2: Monthly Pump Operating Hours -->
-            <div class="p-4 bg-teal-50/60 rounded-2xl border border-teal-200/80">
+            <div class="p-3.5 bg-teal-50/60 rounded-2xl border border-teal-200/80">
               <div class="text-xs text-teal-800 font-medium mb-1 flex items-center justify-between">
-                <span>ชั่วโมงการทำงานปั๊มสูบรวม</span>
+                <span>ชั่วโมงปั๊มสูบรวม</span>
                 <button onclick="copySpecificValue('ts2PumpHoursTotal', 'ชั่วโมงปั๊มสูบรวม')" class="text-teal-600 hover:text-teal-800"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
               </div>
-              <div class="text-xl sm:text-2xl font-bold text-teal-900 font-mono" id="ts2PumpHoursTotal">๑๙๕.๐</div>
-              <div class="text-[11px] text-teal-700 mt-0.5">ชั่วโมง/เดือน (เฉลี่ย <span id="ts2PumpHoursAvg" class="font-semibold">๖.๕</span> ชม./วัน)</div>
+              <div class="text-lg sm:text-xl font-bold text-teal-900 font-mono" id="ts2PumpHoursTotal">๑๙๕.๐</div>
+              <div class="text-[10px] text-teal-700 mt-0.5">ชม./เดือน (เฉลี่ย <span id="ts2PumpHoursAvg" class="font-semibold">๖.๕</span> ชม./วัน)</div>
             </div>
 
             <!-- Metric 3: Monthly Total Wastewater Inflow -->
-            <div class="p-4 bg-emerald-50/70 rounded-2xl border border-emerald-200/80">
+            <div class="p-3.5 bg-emerald-50/70 rounded-2xl border border-emerald-200/80">
               <div class="text-xs text-emerald-800 font-medium mb-1 flex items-center justify-between">
-                <span>ปริมาณน้ำเสียเข้าระบบรวม</span>
+                <span>น้ำเสียเข้าระบบรวม</span>
                 <button onclick="copySpecificValue('ts2WwtsTotal', 'น้ำเสียเข้าระบบรวม')" class="text-emerald-600 hover:text-emerald-800"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
               </div>
-              <div class="text-xl sm:text-2xl font-bold text-emerald-900 font-mono" id="ts2WwtsTotal">๓,๑๑๕.๑</div>
-              <div class="text-[11px] text-emerald-700 mt-0.5">ลบ.ม./เดือน (สูบเข้าบำบัด)</div>
+              <div class="text-lg sm:text-xl font-bold text-emerald-900 font-mono" id="ts2WwtsTotal">๓,๑๑๕.๑</div>
+              <div class="text-[10px] text-emerald-700 mt-0.5">ลบ.ม./เดือน (สูบเข้าบำบัด)</div>
             </div>
 
             <!-- Metric 4: Daily Average Inflow -->
-            <div class="p-4 bg-indigo-50/60 rounded-2xl border border-indigo-200/80">
+            <div class="p-3.5 bg-indigo-50/60 rounded-2xl border border-indigo-200/80">
               <div class="text-xs text-indigo-800 font-medium mb-1 flex items-center justify-between">
-                <span>ปริมาณน้ำเสียเฉลี่ยต่อวัน</span>
+                <span>น้ำเสียเฉลี่ยต่อวัน</span>
                 <button onclick="copySpecificValue('ts2WwtsDailyAvg', 'น้ำเสียเฉลี่ยต่อวัน')" class="text-indigo-600 hover:text-indigo-800"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
               </div>
-              <div class="text-xl sm:text-2xl font-bold text-indigo-900 font-mono" id="ts2WwtsDailyAvg">๑๐๓.๘</div>
-              <div class="text-[11px] text-indigo-700 mt-0.5">ลบ.ม./วัน (คิดเป็น ๗๒.๘% ของน้ำใช้)</div>
+              <div class="text-lg sm:text-xl font-bold text-indigo-900 font-mono" id="ts2WwtsDailyAvg">๑๐๓.๘</div>
+              <div class="text-[10px] text-indigo-700 mt-0.5">ลบ.ม./วัน (๗๒.๘% ของน้ำใช้)</div>
+            </div>
+
+            <!-- Metric 5: Monthly Electricity Used in WWTS (Item 2.1) -->
+            <div class="p-3.5 bg-amber-50/70 rounded-2xl border border-amber-300/80 col-span-2 sm:col-span-1">
+              <div class="text-xs text-amber-900 font-medium mb-1 flex items-center justify-between">
+                <span>การใช้ไฟฟ้าบำบัดน้ำเสีย</span>
+                <button onclick="copySpecificValue('ts2ElectricityTotal', 'การใช้ไฟฟ้าบำบัดน้ำเสีย')" class="text-amber-600 hover:text-amber-800"><i data-lucide="copy" class="w-3.5 h-3.5"></i></button>
+              </div>
+              <div class="text-lg sm:text-xl font-bold text-amber-900 font-mono" id="ts2ElectricityTotal">๑,๔๔๐.๐</div>
+              <div class="text-[10px] text-amber-700 mt-0.5">หน่วย (kWh)/เดือน (เฉลี่ย ๔๘.๐ หน่วย/วัน)</div>
             </div>
           </div>
         </div>
@@ -1328,7 +1476,7 @@
             <table class="w-full text-xs text-left text-slate-700">
               <thead class="bg-slate-50 text-slate-600 font-semibold border-y border-slate-200">
                 <tr>
-                  <th class="py-2.5 px-3">รายการพารามิเตอร์</th>
+                  <th class="py-2.5 px-3">รายการพารามิเตอร์ / สารเคมี</th>
                   <th class="py-2.5 px-3">ค่ามาตรฐานควบคุม (คพ.)</th>
                   <th class="py-2.5 px-3">ค่าเฉลี่ยที่ตรวจวัดได้จริง</th>
                   <th class="py-2.5 px-3">การประเมินผล</th>
@@ -1364,20 +1512,31 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="py-2.5 px-3 font-sans font-medium text-slate-800">การใช้สารเคมีฆ่าเชื้อ (คลอรีน ๑๐%)</td>
+                  <td class="py-2.5 px-3 font-sans font-medium text-slate-800">คลอรีนฆ่าเชื้อในระบบบำบัดน้ำเสีย (WWTS)</td>
                   <td class="py-2.5 px-3 text-slate-500">เติมต่อเนื่องในบ่อสัมผัสคลอรีน</td>
-                  <td class="py-2.5 px-3 font-bold text-indigo-800" id="ts2ChemicalUse">๖๐ ลิตร/เดือน</td>
+                  <td class="py-2.5 px-3 font-bold text-indigo-800" id="ts2ChemicalUse">๖๐ ลิตร/เดือน (เฉลี่ย ๑๕ ลิตร/สัปดาห์)</td>
                   <td class="py-2.5 px-3 font-sans"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[11px] font-semibold">ปกติ</span></td>
                   <td class="py-2.5 px-3 text-right">
-                    <button onclick="copySpecificValue('ts2ChemicalUse', 'ปริมาณคลอรีนที่ใช้')" class="text-slate-400 hover:text-teal-700"><i data-lucide="copy" class="w-3.5 h-3.5 inline"></i></button>
+                    <button onclick="copySpecificValue('ts2ChemicalUse', 'ปริมาณคลอรีนน้ำเสีย')" class="text-slate-400 hover:text-teal-700"><i data-lucide="copy" class="w-3.5 h-3.5 inline"></i></button>
                   </td>
                 </tr>
                 <tr>
-                  <td class="py-2.5 px-3 font-sans font-medium text-slate-800">สถานะเครื่องเติมอากาศ (Aerator 1 & 2)</td>
-                  <td class="py-2.5 px-3 text-slate-500">พร้อมเดินเครื่อง ๒๔ ชม.</td>
-                  <td class="py-2.5 px-3 font-sans text-slate-800">สลับทำงานอัตโนมัติ ๑๐๐%</td>
-                  <td class="py-2.5 px-3 font-sans"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[11px] font-semibold">สมบูรณ์</span></td>
-                  <td class="py-2.5 px-3 text-right">-</td>
+                  <td class="py-2.5 px-3 font-sans font-medium text-slate-800">สารส้มที่ใช้ในระบบผลิตน้ำประปา (Alum)</td>
+                  <td class="py-2.5 px-3 text-slate-500">เติมตามอัตราความขุ่นน้ำดิบ</td>
+                  <td class="py-2.5 px-3 font-bold text-sky-800" id="ts2AlumUse">๒๐๐.๐ กก./เดือน (เฉลี่ย ๕๐ กก./สัปดาห์)</td>
+                  <td class="py-2.5 px-3 font-sans"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[11px] font-semibold">ปกติ</span></td>
+                  <td class="py-2.5 px-3 text-right">
+                    <button onclick="copySpecificValue('ts2AlumUse', 'ปริมาณสารส้ม')" class="text-slate-400 hover:text-teal-700"><i data-lucide="copy" class="w-3.5 h-3.5 inline"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3 font-sans font-medium text-slate-800">คลอรีนฆ่าเชื้อในระบบประปา</td>
+                  <td class="py-2.5 px-3 text-slate-500">คงเหลือปลายท่อ ≥ ๐.๒ mg/L</td>
+                  <td class="py-2.5 px-3 font-bold text-sky-800" id="ts2WaterChlorineUse">๘๐.๐ กก./เดือน (เฉลี่ย ๒๐ กก./สัปดาห์)</td>
+                  <td class="py-2.5 px-3 font-sans"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[11px] font-semibold">ปกติ</span></td>
+                  <td class="py-2.5 px-3 text-right">
+                    <button onclick="copySpecificValue('ts2WaterChlorineUse', 'ปริมาณคลอรีนประปา')" class="text-slate-400 hover:text-teal-700"><i data-lucide="copy" class="w-3.5 h-3.5 inline"></i></button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -1830,6 +1989,38 @@
       'M-04': 3190.8
     };
 
+    // Live calculation for wastewater treatment electricity usage (kWh / Units)
+    function calculateWwtsElectricity() {
+      const prev = parseFloat(document.getElementById('wwtsElectricPrev')?.value) || 0;
+      const todayInput = document.getElementById('wwtsElectricToday');
+      const box = document.getElementById('wwtsElectricBox');
+      const valEl = document.getElementById('wwtsElectricVal');
+
+      if (!todayInput || todayInput.value.trim() === '') {
+        if (box) box.classList.add('hidden');
+        return 0;
+      }
+
+      const today = parseFloat(todayInput.value);
+      if (isNaN(today)) {
+        if (box) box.classList.add('hidden');
+        return 0;
+      }
+
+      const diff = parseFloat((today - prev).toFixed(1));
+      if (box && valEl) {
+        box.classList.remove('hidden');
+        if (diff < 0) {
+          box.className = "p-3 rounded-xl border flex items-center justify-between bg-rose-50 border-rose-200 text-rose-800";
+          valEl.innerText = `ตัวเลขลดลง (${diff} หน่วย)`;
+        } else {
+          box.className = "p-3 rounded-xl border flex items-center justify-between bg-amber-50 border-amber-200 text-amber-900";
+          valEl.innerText = `${diff} หน่วย (kWh)`;
+        }
+      }
+      return diff;
+    }
+
     // Update previous reading based on selected water meter
     function updatePreviousWaterMeter() {
       const select = document.getElementById('waterMeterSelect');
@@ -1998,17 +2189,57 @@
       return { hours, inflowM3 };
     }
 
-    // Sum total weight of five waste types
+    // Sum total weight of all waste types (Hospital + External Depository from Health Centers)
     function calcWasteTotal() {
       const g = parseFloat(document.getElementById('wGeneral')?.value) || 0;
       const r = parseFloat(document.getElementById('wRecycle')?.value) || 0;
       const o = parseFloat(document.getElementById('wOrganic')?.value) || 0;
       const haz = parseFloat(document.getElementById('wHazardous')?.value) || 0;
-      const inf = parseFloat(document.getElementById('wInfectious')?.value) || 0;
-      const total = (g + r + o + haz + inf).toFixed(1);
-      const display = document.getElementById('wasteTotalDisplay');
-      if (display) display.innerText = `${total} กก.`;
-      return total;
+
+      // Hospital internal infectious
+      const infHospGen = parseFloat(document.getElementById('wInfHospGeneral')?.value) || 0;
+      const infHospHaz = parseFloat(document.getElementById('wInfHospHazardous')?.value) || 0;
+      const hospInfTotal = parseFloat((infHospGen + infHospHaz).toFixed(1));
+
+      // External deposited infectious from Health Centers
+      const infExtGen = parseFloat(document.getElementById('wInfExtGeneral')?.value) || 0;
+      const infExtHaz = parseFloat(document.getElementById('wInfExtHazardous')?.value) || 0;
+      const extInfTotal = parseFloat((infExtGen + infExtHaz).toFixed(1));
+
+      const totalInf = parseFloat((hospInfTotal + extInfTotal).toFixed(1));
+      const grandTotal = parseFloat((g + r + o + haz + totalInf).toFixed(1));
+
+      // Update UI displays
+      const hospInfEl = document.getElementById('wasteHospInfDisplay');
+      if (hospInfEl) hospInfEl.innerText = `${hospInfTotal} กก. (ทั่วไป ${infHospGen} + อันตราย ${infHospHaz})`;
+
+      const extInfEl = document.getElementById('wasteExtInfDisplay');
+      if (extInfEl) extInfEl.innerText = `${extInfTotal} กก. (ทั่วไป ${infExtGen} + อันตราย ${infExtHaz})`;
+
+      const totalInfEl = document.getElementById('wasteTotalInfDisplay');
+      if (totalInfEl) totalInfEl.innerText = `${totalInf} กก.`;
+
+      const grandTotalEl = document.getElementById('wasteTotalDisplay');
+      if (grandTotalEl) grandTotalEl.innerText = `${grandTotal} กก.`;
+
+      // Update top KPI
+      const kpiInf = document.getElementById('kpiInfectious');
+      if (kpiInf) kpiInf.innerText = hospInfTotal;
+
+      return {
+        general: g,
+        recycle: r,
+        organic: o,
+        hazardous: haz,
+        hospInfGen: infHospGen,
+        hospInfHaz: infHospHaz,
+        hospInfTotal: hospInfTotal,
+        extInfGen: infExtGen,
+        extInfHaz: infExtHaz,
+        extInfTotal: extInfTotal,
+        totalInfectious: totalInf,
+        grandTotal: grandTotal
+      };
     }
 
     // Toggle custom incident input field when "อื่นๆ" is selected
@@ -2540,12 +2771,14 @@
       const prev = parseFloat(document.getElementById('waterPrev').value);
       const diff = (curr - prev).toFixed(1);
       const cl = document.getElementById('waterChlorine').value;
+      const alum = document.getElementById('waterAlumUsage')?.value || '50';
+      const clUsage = document.getElementById('waterChlorineUsage')?.value || '20';
 
       addHistoryRow({
         date: dateVal,
         cat: 'ระบบประปา',
         point: `มิเตอร์ ${meter}`,
-        value: `ใช้น้ำ: ${diff} ลบ.ม. (คลอรีน: ${cl} mg/L)`,
+        value: `ใช้น้ำ: ${diff} ลบ.ม. (คลอรีน: ${cl} mg/L, สารส้ม: ${alum} กก./สัปดาห์, คลอรีนใช้: ${clUsage} กก./สัปดาห์)`,
         status: diff >= 0 ? 'ผ่านเกณฑ์' : 'เลขผิดพลาด',
         recorder: 'นายจีรศักดิ์ นวลดี'
       });
@@ -2573,9 +2806,11 @@
         return;
       }
 
+      const electricDiff = calculateWwtsElectricity();
       const doVal = parseFloat(document.getElementById('wwtsDo').value);
       const phVal = parseFloat(document.getElementById('wwtsPh').value);
       const clVal = parseFloat(document.getElementById('wwtsChlorineEffluent').value);
+      const clWeekly = document.getElementById('wwtsChlorineWeeklyUsage')?.value || '15';
       const hours = pumpCalc.hours;
       const inflow = pumpCalc.inflowM3;
 
@@ -2583,7 +2818,7 @@
         date: dateVal,
         cat: 'บำบัดน้ำเสีย',
         point: 'บ่อสูบน้ำเสีย & บ่อเติมอากาศ',
-        value: `ปั๊ม ${hours} ชม. (${inflow} ลบ.ม.) | DO: ${doVal} | คลอรีน: ${clVal} mg/L`,
+        value: `ปั๊ม ${hours} ชม. (${inflow} ลบ.ม.) | ไฟฟ้า: ${electricDiff} หน่วย | DO: ${doVal} | คลอรีนน้ำทิ้ง: ${clVal} mg/L (คลอรีนใช้: ${clWeekly} ลิตร/สัปดาห์)`,
         status: (doVal >= 2.0 && clVal >= 0.2 && hours >= 0) ? 'ผ่านเกณฑ์' : 'ต้องเฝ้าระวัง',
         recorder: 'นายจีรศักดิ์ นวลดี'
       });
@@ -2605,7 +2840,7 @@
       const noteEl = document.getElementById('chartInflowNote');
       if (noteEl) noteEl.innerText = `${inflow} ลบ.ม.`;
 
-      showToast(`บันทึกน้ำเสียสำเร็จ: ปั๊มทำงาน ${hours} ชม. (น้ำเสีย ${inflow} ลบ.ม.)`);
+      showToast(`บันทึกน้ำเสียสำเร็จ: ปั๊ม ${hours} ชม. (น้ำเสีย ${inflow} ลบ.ม., ไฟฟ้า ${electricDiff} หน่วย)`);
       switchCategory('analytics');
     }
 
@@ -2614,30 +2849,24 @@
       const dateVal = document.getElementById('wasteDate').value;
       if (!validateDateRange(dateVal)) return;
 
-      const g = parseFloat(document.getElementById('wGeneral').value) || 0;
-      const r = parseFloat(document.getElementById('wRecycle').value) || 0;
-      const o = parseFloat(document.getElementById('wOrganic').value) || 0;
-      const haz = parseFloat(document.getElementById('wHazardous').value) || 0;
-      const inf = parseFloat(document.getElementById('wInfectious').value) || 0;
-      const totalText = document.getElementById('wasteTotalDisplay').innerText;
+      const waste = calcWasteTotal();
+      const extSource = document.getElementById('wInfExtSource')?.value || 'รพ.สต.';
 
       addHistoryRow({
         date: dateVal,
         cat: 'จัดการขยะ',
         point: 'จุดรวมขยะ รพ.แม่อาย',
-        value: `ติดเชื้อ: ${inf} กก., อันตราย: ${haz} กก. (รวม: ${totalText})`,
+        value: `ติดเชื้อ รพ.: ${waste.hospInfTotal} กก. (ทั่วไป ${waste.hospInfGen} / อันตราย ${waste.hospInfHaz}) | รับฝากจาก ${extSource}: ${waste.extInfTotal} กก. (ทั่วไป ${waste.extInfGen} / อันตราย ${waste.extInfHaz}) | รวมทั้งหมด: ${waste.grandTotal} กก.`,
         status: 'จัดเก็บเรียบร้อย',
         recorder: 'นายจีรศักดิ์ นวลดี'
       });
 
-      document.getElementById('kpiInfectious').innerText = inf;
-
       if (chartWaste) {
-        chartWaste.data.datasets[0].data = [g, r, o, haz, inf];
+        chartWaste.data.datasets[0].data = [waste.general, waste.recycle, waste.organic, waste.hazardous, waste.hospInfTotal];
         chartWaste.update();
       }
 
-      showToast('บันทึกปริมาณขยะ 5 ประเภทเรียบร้อยแล้ว');
+      showToast(`บันทึกขยะเรียบร้อย: ติดเชื้อ รพ. ${waste.hospInfTotal} กก., ฝาก ${extSource} ${waste.extInfTotal} กก.`);
       switchCategory('analytics');
     }
 
@@ -2923,23 +3152,25 @@
       // Calculate totals or default to realistic standard baseline if in demo / start of month
       let totalPumpHours = 0;
       let totalInflowM3 = 0;
+      let totalElectricity = 0;
       let totalDo = 0;
       let totalPh = 0;
       let totalCl = 0;
       let count = 0;
 
       monthlyWwtsRecords.forEach(r => {
-        // extract hours and inflow from text if available
         const hoursMatch = r.value.match(/ปั๊ม\s*([\d.]+)\s*ชม/);
         const inflowMatch = r.value.match(/\(([\d.]+)\s*ลบ\.ม\.\)/);
+        const electricMatch = r.value.match(/ไฟฟ้า:\s*([\d.]+)\s*หน่วย/);
         const doMatch = r.value.match(/DO:\s*([\d.]+)/);
-        const clMatch = r.value.match(/คลอรีน:\s*([\d.]+)/);
+        const clMatch = r.value.match(/คลอรีนน้ำทิ้ง:\s*([\d.]+)/);
 
         if (hoursMatch) totalPumpHours += parseFloat(hoursMatch[1]) || 0;
         if (inflowMatch) totalInflowM3 += parseFloat(inflowMatch[1]) || 0;
+        if (electricMatch) totalElectricity += parseFloat(electricMatch[1]) || 0;
         if (doMatch) totalDo += parseFloat(doMatch[1]) || 0;
         if (clMatch) totalCl += parseFloat(clMatch[1]) || 0;
-        totalPh += 7.33; // standard stable pH
+        totalPh += 7.33;
         count++;
       });
 
@@ -2950,6 +3181,8 @@
       
       const wwtsTotal = count > 0 ? totalInflowM3.toFixed(1) : (6.5 * daysInMonth * WWTS_PUMP_FLOW_RATE).toFixed(1);
       const wwtsDailyAvg = count > 0 ? (totalInflowM3 / count).toFixed(1) : (6.5 * WWTS_PUMP_FLOW_RATE).toFixed(1);
+      
+      const electricityTotal = count > 0 ? totalElectricity.toFixed(1) : (48.0 * daysInMonth).toFixed(1);
       
       const waterTotal = (parseFloat(wwtsTotal) / 0.728).toFixed(1);
       const waterAvg = (parseFloat(waterTotal) / daysInMonth).toFixed(1);
@@ -2966,6 +3199,7 @@
       setVal('ts2PumpHoursAvg', pumpHoursAvg);
       setVal('ts2WwtsTotal', parseFloat(wwtsTotal).toLocaleString('th-TH', { minimumFractionDigits: 1 }));
       setVal('ts2WwtsDailyAvg', parseFloat(wwtsDailyAvg).toLocaleString('th-TH', { minimumFractionDigits: 1 }));
+      setVal('ts2ElectricityTotal', parseFloat(electricityTotal).toLocaleString('th-TH', { minimumFractionDigits: 1 }));
       setVal('ts2DoAvg', `${doAvg} mg/L`);
       setVal('ts2ChlorineAvg', `${chlorineAvg} mg/L`);
       setVal('ts2PhAvg', phAvg);
@@ -3002,22 +3236,6 @@
       lucide.createIcons();
     }
 
-    // Copy single value to clipboard
-    function copySpecificValue(elementId, label) {
-      const el = document.getElementById(elementId);
-      if (!el) return;
-      const text = el.innerText.trim();
-      
-      const temp = document.createElement('textarea');
-      temp.value = text.replace(/[^\d.]/g, ''); // Extract purely clean numbers if needed
-      document.body.appendChild(temp);
-      temp.select();
-      document.execCommand('copy');
-      document.body.removeChild(temp);
-      
-      showToast(`คัดลอกค่า "${label}" เรียบร้อยแล้ว: ${temp.value}`);
-    }
-
     // Copy full structured text of TS.2 to paste into PCD system or notes
     function copyFullTs2Text() {
       const selectEl = document.getElementById('ts2MonthSelect');
@@ -3028,30 +3246,40 @@
       const pumpHours = document.getElementById('ts2PumpHoursTotal')?.innerText || '';
       const wwtsTotal = document.getElementById('ts2WwtsTotal')?.innerText || '';
       const wwtsAvg = document.getElementById('ts2WwtsDailyAvg')?.innerText || '';
+      const electricityTotal = document.getElementById('ts2ElectricityTotal')?.innerText || '';
       const doVal = document.getElementById('ts2DoAvg')?.innerText || '';
       const phVal = document.getElementById('ts2PhAvg')?.innerText || '';
       const clVal = document.getElementById('ts2ChlorineAvg')?.innerText || '';
-      const chemVal = document.getElementById('ts2ChemicalUse')?.innerText || '';
+      const chemWwts = document.getElementById('ts2ChemicalUse')?.innerText || '';
+      const alumUse = document.getElementById('ts2AlumUse')?.innerText || '';
+      const waterClUse = document.getElementById('ts2WaterChlorineUse')?.innerText || '';
 
       const summaryText = 
-`[สรุปข้อมูลแบบ ทส.๒ สำหรับรายงานกรมควบคุมมลพิษ]
-แหล่งกำเนิดมลพิษ: โรงพยาบาลแม่อาย (สถานพยาบาลของทางราชการ)
-สถานที่ตั้ง: ๑๔๔ หมู่ ๕ ต.มะลิกา อ.แม่อาย จ.เชียงใหม่
-ประจำเดือน: ${monthText}
-ระบบบำบัด: ระบบตะกอนเร่ง (Activated Sludge : AS) บ่อเติมอากาศ
-อัตราสูบปั๊ม: ๑๕.๙๗๕ ลบ.ม./ชั่วโมง
+`[สรุปข้อมูลแบบ ทส.๒ สำหรับรายงานกรมควบคุมมลพิษ (PCD e-Service)]
+๑. ข้อมูลทั่วไปของแหล่งกำเนิดมลพิษ:
+   - ชื่อสถานบริการ: โรงพยาบาลแม่อาย
+   - ประเภทแหล่งกำเนิด: โรงพยาบาล ประเภทย่อย ประเภท ก ตั้งแต่ 30 เตียงขึ้นไป
+   - สถานที่ตั้ง: ๑๙๑ หมู่ ๘ ต.มะลิกา อ.แม่อาย จ.เชียงใหม่ ๕๐๒๘๐ โทร ๐๕๓-๔๕๙๐๓๖
+   - ประจำเดือน: ${monthText}
+   - ระบบบำบัดน้ำเสีย: ระบบตะกอนเร่ง (Activated Sludge : AS) บ่อเติมอากาศ
+   - อัตราการสูบน้ำเสีย: ๑๕.๙๗๕ ลูกบาศก์เมตรต่อชั่วโมง
 
-๑. ปริมาณการใช้น้ำประปารวม: ${waterTotal} ลบ.ม./เดือน (เฉลี่ย ${waterAvg} ลบ.ม./วัน)
-๒. ชั่วโมงการทำงานปั๊มสูบน้ำเสีย: ${pumpHours} ชั่วโมง/เดือน
-๓. ปริมาณน้ำเสียเข้าระบบรวม: ${wwtsTotal} ลบ.ม./เดือน
-๔. ปริมาณน้ำเสียเฉลี่ยต่อวัน: ${wwtsAvg} ลบ.ม./วัน
-๕. คุณภาพน้ำและสารเคมี:
-   - ค่า DO ในบ่อเติมอากาศ: ${doVal}
-   - ค่า pH น้ำทิ้ง: ${phVal}
+๒. สรุปปริมาณน้ำใช้, น้ำเสีย และพลังงานไฟฟ้า (ประจำเดือน):
+   ๒.๑ ปริมาณการใช้ไฟฟ้าของระบบบำบัดน้ำเสีย: ${electricityTotal} หน่วย (kWh)/เดือน
+   ๒.๒ ปริมาณน้ำใช้ในทุกกิจกรรมของแหล่งกำเนิดมลพิษ: ${waterTotal} ลบ.ม./เดือน (เฉลี่ย ${waterAvg} ลบ.ม./วัน)
+   ๒.๓ ชั่วโมงการทำงานปั๊มสูบน้ำเสีย: ${pumpHours} ชั่วโมง/เดือน
+   ๒.๔ ปริมาณน้ำเสียที่เข้าสู่ระบบบำบัดน้ำเสีย: ${wwtsTotal} ลบ.ม./เดือน (เฉลี่ย ${wwtsAvg} ลบ.ม./วัน)
+
+๓. คุณภาพน้ำและการใช้สารเคมี:
+   - ออกซิเจนละลายน้ำ (DO บ่อเติมอากาศ): ${doVal}
+   - ค่าความเป็นกรด-ด่าง (pH น้ำทิ้ง): ${phVal}
    - คลอรีนอิสระคงเหลือในน้ำทิ้ง: ${clVal}
-   - ปริมาณสารละลายคลอรีนที่ใช้: ${chemVal}
-๖. การบำรุงรักษา: ระบบเดินเครื่องปกติ ไม่มีเหตุขัดข้องเกิน ๒๔ ชม.
-๗. ผู้จัดทำรายงาน: นายจีรศักดิ์ นวลดี (นักสาธารณสุขปฏิบัติการ) กลุ่มงานควบคุมโรค`;
+   - คลอรีนที่ใช้ในระบบบำบัดน้ำเสีย: ${chemWwts}
+   - สารส้มที่ใช้ในระบบประปา: ${alumUse}
+   - คลอรีนที่ใช้ในระบบประปา: ${waterClUse}
+
+๔. การบำรุงรักษา: ระบบเดินเครื่องปกติ ไม่มีการหยุดเดินระบบเกิน ๒๔ ชั่วโมง
+๕. ผู้จัดทำรายงาน: นายจีรศักดิ์ นวลดี (นักสาธารณสุขปฏิบัติการ) กลุ่มงานควบคุมโรค โรงพยาบาลแม่อาย`;
 
       const temp = document.createElement('textarea');
       temp.value = summaryText;
