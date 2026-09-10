@@ -194,7 +194,7 @@
         <div class="flex items-center gap-2 flex-shrink-0">
           <button onclick="openScanModal()" class="inline-flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold px-3.5 py-2 rounded-xl shadow-sm transition active:scale-95 text-xs sm:text-sm">
             <i data-lucide="qr-code" class="w-4 h-4 sm:w-4.5 sm:h-4.5"></i>
-            <span>สแกน QR หน้างาน</span>
+            <span>สแกน / แสดงรูป QR Code</span>
           </button>
           <button onclick="openResetModal()" class="inline-flex items-center gap-1.5 bg-emerald-700/90 hover:bg-emerald-600 text-white font-semibold px-3.5 py-2 rounded-xl border border-emerald-400/40 transition active:scale-95 shadow-sm text-xs sm:text-sm">
             <i data-lucide="settings-2" class="w-4 h-4 text-emerald-200"></i>
@@ -1884,42 +1884,128 @@
   </main>
 
   <!-- Modals (Scan, Reset) -->
-  <div id="scanModal" class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 hidden">
-    <div class="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-slate-100 flex flex-col max-h-[90vh]">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+  <div id="scanModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-5 sm:p-6 shadow-2xl border-2 border-emerald-700 flex flex-col max-h-[92vh]">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200">
         <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center border-2 border-emerald-600">
             <i data-lucide="qr-code" class="w-5 h-5"></i>
           </div>
           <div>
-            <h3 class="font-bold text-slate-800 text-sm sm:text-base">ระบบสแกน QR Code หน้างาน รพ.แม่อาย</h3>
-            <p class="text-[11px] text-slate-500">จำลองสแกน และแนะนำวิธีการจัดทำป้ายประจำจุด</p>
+            <h3 class="font-bold text-slate-900 text-sm sm:text-base">ศูนย์แสดงรูปภาพ & ป้าย QR Code โรงพยาบาลแม่อาย</h3>
+            <p class="text-[11px] text-slate-500 font-medium">ดูรูป QR Code, บันทึกไฟล์รูปภาพ, พิมพ์ป้ายหน้างาน หรือสแกนเปิดฟอร์ม</p>
           </div>
         </div>
-        <button onclick="closeScanModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center">
-          <i data-lucide="x" class="w-4 h-4"></i>
+        <button onclick="closeScanModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
+          <i data-lucide="x" class="w-4.5 h-4.5"></i>
         </button>
       </div>
 
-      <div class="py-4 space-y-3 text-xs overflow-y-auto custom-scroll">
-        <p class="text-slate-600">คลิกเลือกจุดตรวจจำลองเพื่อทดสอบเปิดแบบฟอร์มหน้างานทันที:</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <button onclick="simulateScan('M-01')" class="p-2.5 rounded-xl border hover:bg-emerald-50 text-left transition flex justify-between items-center">
-            <span>💧 M-01 มิเตอร์น้ำดิบ</span>
-            <span class="text-[10px] bg-sky-100 text-sky-800 px-2 py-0.5 rounded">จดมิเตอร์</span>
+      <!-- Modal Tabs -->
+      <div class="flex items-center gap-2 border-b border-slate-200 pt-3 pb-2 text-xs font-semibold">
+        <button id="qrTabBtn-view" onclick="switchQrTab('view')" class="px-3 py-1.5 rounded-xl bg-emerald-700 text-white flex items-center gap-1.5 shadow-xs">
+          <i data-lucide="image" class="w-3.5 h-3.5"></i>
+          <span>๑. แสดงรูปภาพ & สร้างป้าย QR</span>
+        </button>
+        <button id="qrTabBtn-sim" onclick="switchQrTab('sim')" class="px-3 py-1.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5">
+          <i data-lucide="play-circle" class="w-3.5 h-3.5"></i>
+          <span>๒. ทดสอบจำลองสแกนหน้างาน</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: Real QR Code Image Viewer & Printable Card -->
+      <div id="qrPane-view" class="py-3 space-y-3.5 text-xs overflow-y-auto custom-scroll">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-700 font-bold mb-1">เลือกจุดตรวจที่ต้องการสร้างรูป QR Code:</label>
+            <select id="qrPointSelect" onchange="renderSelectedQrCode()" class="w-full bg-slate-50 border-2 border-slate-700 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500">
+              <option value="M-01" selected>💧 M-01 : มิเตอร์น้ำดิบเข้าโรงกรอง</option>
+              <option value="M-02">💧 M-02 : มิเตอร์ส่งจ่ายน้ำประปารวม</option>
+              <option value="M-03">💧 M-03 : มิเตอร์อาคารผู้ป่วยนอก (OPD)</option>
+              <option value="M-04">💧 M-04 : มิเตอร์อาคารสนับสนุน/ซักฟอก</option>
+              <option value="WWTS-01">🧪 WWTS-01 : บ่อบำบัดน้ำเสีย & ปั๊มสูบ</option>
+              <option value="WASTE-01">🗑️ WASTE-01 : จุดชั่งขยะมูลฝอย (5 ชนิด + รับฝาก)</option>
+              <option value="SAFETY-01">🛡️ SAFETY-01 : จุดรายงานความปลอดภัย & อุบัติการณ์</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-700 font-bold mb-1">URL ฐานของเว็บไซต์ (GitHub Pages หรือ Domain):</label>
+            <input type="text" id="qrCustomUrl" oninput="renderSelectedQrCode()" class="w-full bg-slate-50 border-2 border-slate-700 rounded-xl px-3 py-1.5 text-xs font-mono text-slate-900" placeholder="https://yourname.github.io/maeai-env/">
+            <span class="text-[10px] text-slate-500">ระบบตรวจจับ URL ปัจจุบันให้อัตโนมัติ</span>
+          </div>
+        </div>
+
+        <!-- Real Generated QR Code Card Display -->
+        <div id="qrPrintArea" class="bg-gradient-to-b from-emerald-50/60 to-white p-4 rounded-2xl border-2 border-emerald-700 text-center shadow-sm space-y-2.5">
+          <div class="flex items-center justify-center gap-2 pb-2 border-b border-emerald-200/70">
+            <span class="bg-emerald-700 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full">โรงพยาบาลแม่อาย</span>
+            <span class="text-xs font-bold text-slate-800" id="qrCardTitle">จุดตรวจที่ ๑ : มิเตอร์น้ำดิบ (M-01)</span>
+          </div>
+          
+          <!-- The QR Code Image -->
+          <div class="relative inline-block p-3 bg-white rounded-2xl border-2 border-slate-300 shadow-md">
+            <img id="qrGeneratedImg" src="" alt="QR Code ประจำจุดตรวจ" class="w-44 h-44 sm:w-48 sm:h-48 object-contain mx-auto" onerror="this.src='https://placehold.co/200x200/ffffff/047857?text=QR+Image';">
+            <div class="text-[10px] font-mono text-slate-500 mt-1" id="qrCardSubCode">ID: M-01</div>
+          </div>
+
+          <p class="text-[11px] text-slate-600 font-medium leading-relaxed">
+            สแกนด้วยกล้องมือถือหรือ LINE เพื่อบันทึกข้อมูลหน้างาน ณ โรงพยาบาลแม่อาย<br>
+            <span class="text-emerald-800 font-bold" id="qrFullUrlPreview">...</span>
+          </p>
+        </div>
+
+        <!-- Action Buttons: Download Image & Print Signage -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+          <button onclick="downloadQrImage()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm text-xs">
+            <i data-lucide="download" class="w-4 h-4"></i>
+            <span>บันทึกรูปภาพ QR Code (.PNG)</span>
           </button>
-          <button onclick="simulateScan('WWTS-01')" class="p-2.5 rounded-xl border hover:bg-teal-50 text-left transition flex justify-between items-center">
-            <span>🧪 WWTS บ่อบำบัดน้ำเสีย</span>
-            <span class="text-[10px] bg-teal-100 text-teal-800 px-2 py-0.5 rounded">ตรวจน้ำเสีย</span>
-          </button>
-          <button onclick="simulateScan('WASTE-01')" class="p-2.5 rounded-xl border hover:bg-amber-50 text-left transition flex justify-between items-center sm:col-span-2">
-            <span>🗑️ WASTE-01 ชั่งขยะมูลฝอย (5 ประเภท + รับฝาก)</span>
-            <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded">ชั่งขยะ</span>
+          <button onclick="printQrSignage()" class="w-full bg-white hover:bg-slate-50 text-slate-800 font-bold py-2.5 px-3 rounded-xl border-2 border-slate-400 transition flex items-center justify-center gap-1.5 shadow-xs text-xs">
+            <i data-lucide="printer" class="w-4 h-4 text-slate-600"></i>
+            <span>พิมพ์ป้ายประจำจุดหน้างาน</span>
           </button>
         </div>
       </div>
-      <div class="pt-3 border-t border-slate-100 text-right">
-        <button onclick="closeScanModal()" class="py-2 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs">ปิด</button>
+
+      <!-- TAB 2: Checkpoint Simulation & Camera Test -->
+      <div id="qrPane-sim" class="py-3 space-y-3 text-xs overflow-y-auto custom-scroll hidden">
+        <p class="text-slate-600 font-medium">คลิกเลือกจุดตรวจด้านล่างเพื่อทดสอบเปิดแบบฟอร์มหน้างานทันทีเสมือนสแกนจริง:</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <button onclick="simulateScan('M-01')" class="p-2.5 rounded-xl border-2 border-sky-300 hover:bg-sky-50 text-left transition flex justify-between items-center bg-white shadow-xs">
+            <div>
+              <span class="font-bold text-slate-800 block">💧 M-01 มิเตอร์น้ำดิบ</span>
+              <span class="text-[10px] text-slate-500">โรงกรองน้ำประปา</span>
+            </div>
+            <span class="text-[10px] bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded border border-sky-300">จดมิเตอร์</span>
+          </button>
+          <button onclick="simulateScan('M-02')" class="p-2.5 rounded-xl border-2 border-sky-300 hover:bg-sky-50 text-left transition flex justify-between items-center bg-white shadow-xs">
+            <div>
+              <span class="font-bold text-slate-800 block">💧 M-02 มิเตอร์ส่งจ่ายรวม</span>
+              <span class="text-[10px] text-slate-500">ระบบจ่ายน้ำประปา รพ.</span>
+            </div>
+            <span class="text-[10px] bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded border border-sky-300">จดมิเตอร์</span>
+          </button>
+          <button onclick="simulateScan('WWTS-01')" class="p-2.5 rounded-xl border-2 border-teal-300 hover:bg-teal-50 text-left transition flex justify-between items-center bg-white shadow-xs">
+            <div>
+              <span class="font-bold text-slate-800 block">🧪 WWTS บ่อบำบัดน้ำเสีย</span>
+              <span class="text-[10px] text-slate-500">ชั่วโมงปั๊มสูบ, DO, pH, คลอรีน</span>
+            </div>
+            <span class="text-[10px] bg-teal-100 text-teal-800 font-bold px-2 py-0.5 rounded border border-teal-300">ตรวจน้ำเสีย</span>
+          </button>
+          <button onclick="simulateScan('WASTE-01')" class="p-2.5 rounded-xl border-2 border-amber-300 hover:bg-amber-50 text-left transition flex justify-between items-center bg-white shadow-xs">
+            <div>
+              <span class="font-bold text-slate-800 block">🗑️ WASTE ชั่งขยะ 5 ประเภท</span>
+              <span class="text-[10px] text-slate-500">รวมรับฝากจาก รพ.สต.</span>
+            </div>
+            <span class="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded border border-amber-300">ชั่งขยะ</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-200 text-right">
+        <button onclick="closeScanModal()" class="py-2 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition">ปิดหน้าต่าง</button>
       </div>
     </div>
   </div>
@@ -2507,19 +2593,20 @@
       const dateVal = document.getElementById('wasteDate').value;
       if (!validateDateRange(dateVal)) return;
 
-      const waste = calcWasteTotal();
-      const extSource = document.getElementById('wInfExtSource')?.value || 'รพ.สต.';
+      const wCalc = calcWasteTotal();
+      const tempVal = document.getElementById('wasteTemp')?.value || '8.0';
 
       addHistoryRow({
         date: dateVal,
         cat: 'จัดการขยะ',
         point: 'จุดรวมขยะ รพ.แม่อาย',
-        value: `ติดเชื้อ รพ.: ${waste.hospInfTotal} กก., รับฝากจาก ${extSource}: ${waste.extInfTotal} กก. (รวม ${waste.grandTotal} กก.)`,
-        status: 'จัดเก็บเรียบร้อย',
+        value: `ติดเชื้อ รพ. ${wCalc.hospInfTotal} กก., รับฝาก รพ.สต. ${wCalc.extInfTotal} กก. (รวม ${wCalc.grandTotal} กก., อุณหภูมิห้องพัก ${tempVal}°C)`,
+        status: (parseFloat(tempVal) <= 10.0) ? 'ผ่านเกณฑ์' : 'เฝ้าระวังอุณหภูมิ',
         recorder: 'นายจีรศักดิ์ นวลดี'
       });
-      showToast(`บันทึกขยะมูลฝอยสำเร็จ (ติดเชื้อรวม ${waste.totalInf} กก.)`);
-      switchCategory('waste-exec');
+      document.getElementById('kpiInfectious').innerText = wCalc.hospInfTotal;
+      showToast('บันทึกปริมาณขยะมูลฝอยเรียบร้อยแล้วค่ะ');
+      switchCategory('analytics');
     }
 
     function handleSafetySubmit(e) {
@@ -2527,21 +2614,27 @@
       const dateVal = document.getElementById('safetyDate').value;
       if (!validateDateRange(dateVal)) return;
 
-      const type = document.getElementById('safetyType').value;
-      const customInput = document.getElementById('safetyCustomInput').value.trim();
-      const dept = document.getElementById('safetyDept').value || 'ทั่วไป';
-      let finalTypeName = (type === 'custom' && customInput) ? customInput : type;
+      const typeSelect = document.getElementById('safetyType').value;
+      const customType = document.getElementById('safetyCustomInput').value;
+      const finalType = (typeSelect === 'custom' && customType.trim() !== '') ? customType : (typeSelect === 'none' ? 'ไม่มีอุบัติการณ์ (Zero Incident)' : typeSelect);
+      const dept = document.getElementById('safetyDept').value || '-';
+      const role = document.getElementById('safetyRole').value || '-';
+      const detail = document.getElementById('safetyDetail').value || '-';
 
       addHistoryRow({
         date: dateVal,
         cat: 'สิ่งแวดล้อมและความปลอดภัย',
-        point: dept,
-        value: finalTypeName,
-        status: type === 'none' ? 'ปลอดภัย' : 'เฝ้าระวัง/แก้ไข',
+        point: `${dept} (${role})`,
+        value: `ประเภท: ${finalType} | รายละเอียด: ${detail}`,
+        status: typeSelect === 'none' ? 'ปลอดภัย' : 'บันทึกเหตุการณ์',
         recorder: 'นายจีรศักดิ์ นวลดี'
       });
-      showToast('บันทึกรายงานอุบัติการณ์เรียบร้อยแล้วค่ะ');
-      switchCategory('history');
+      if (typeSelect !== 'none') {
+        const kpiAcc = document.getElementById('kpiAccident');
+        if (kpiAcc) kpiAcc.innerText = parseInt(kpiAcc.innerText || '0') + 1;
+      }
+      showToast('ส่งรายงานอุบัติการณ์เรียบร้อยแล้วค่ะ');
+      switchCategory('analytics');
     }
 
     function handleMaintenanceSubmit(e) {
@@ -2551,35 +2644,21 @@
 
       const cat = document.getElementById('maintCategory').value;
       const item = document.getElementById('maintItem').value;
-      const problem = document.getElementById('maintProblem').value;
-      const action = document.getElementById('maintAction').value;
-      const operator = document.getElementById('maintOperator').value;
+      const prob = document.getElementById('maintProblem').value;
+      const act = document.getElementById('maintAction').value;
+      const status = document.getElementById('maintStatus').value;
+      const op = document.getElementById('maintOperator').value || 'นายจีรศักดิ์ นวลดี';
 
       addHistoryRow({
         date: dateVal,
         cat: 'ซ่อมบำรุง/แก้ไข',
         point: `${cat} - ${item}`,
-        value: `ปัญหา: ${problem} | แก้ไข: ${action}`,
-        status: 'เสร็จสิ้น',
-        recorder: operator
+        value: `ปัญหา: ${prob} | แก้ไข: ${act}`,
+        status: status,
+        recorder: op
       });
       showToast('บันทึกผลการปฏิบัติงานและการแก้ไขปัญหาเรียบร้อยแล้วค่ะ');
       switchCategory('analytics');
-    }
-
-    function loadHistoryFromStorage() {
-      const isProduction = localStorage.getItem(STORAGE_KEY_MODE) === 'true';
-      const stored = localStorage.getItem(STORAGE_KEY_HISTORY);
-      if (stored !== null) {
-        try { historyRecords = JSON.parse(stored); } catch(e) { historyRecords = isProduction ? [] : [...defaultMockHistory]; }
-      } else {
-        historyRecords = isProduction ? [] : [...defaultMockHistory];
-      }
-      renderHistoryTable();
-    }
-
-    function saveHistoryToStorage() {
-      localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(historyRecords));
     }
 
     function addHistoryRow(record) {
@@ -2592,56 +2671,218 @@
       const tbody = document.getElementById('historyTableBody');
       if (!tbody) return;
       tbody.innerHTML = '';
-
       if (historyRecords.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-slate-400">ยังไม่มีข้อมูลบันทึก (พร้อมเริ่ม 1 ต.ค. 2569)</td></tr>`;
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-slate-400 font-medium">ยังไม่มีข้อมูลที่บันทึกไว้ในระบบ</td></tr>';
         return;
       }
-
-      historyRecords.forEach(item => {
+      historyRecords.forEach((item, index) => {
         const tr = document.createElement('tr');
-        tr.className = "hover:bg-slate-50 transition";
+        tr.className = index % 2 === 0 ? 'bg-white' : 'bg-slate-50/70';
         tr.innerHTML = `
-          <td class="py-3 px-3 font-mono text-slate-500">${item.date}</td>
-          <td class="py-3 px-3 font-medium text-slate-800">${item.cat}</td>
-          <td class="py-3 px-3 text-slate-600">${item.point}</td>
-          <td class="py-3 px-3 font-mono">${item.value}</td>
-          <td class="py-3 px-3"><span class="inline-block px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">${item.status}</span></td>
-          <td class="py-3 px-3 text-slate-500">${item.recorder}</td>
+          <td class="py-2.5 px-3 font-mono font-medium text-slate-600">${item.date}</td>
+          <td class="py-2.5 px-3 font-semibold text-slate-800">${item.cat}</td>
+          <td class="py-2.5 px-3 text-slate-700">${item.point}</td>
+          <td class="py-2.5 px-3 text-slate-600">${item.value}</td>
+          <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${item.status === 'ผ่านเกณฑ์' || item.status === 'ปลอดภัย' || item.status.includes('เสร็จสิ้น') ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-amber-100 text-amber-800 border border-amber-300'}">${item.status}</span></td>
+          <td class="py-2.5 px-3 text-slate-600">${item.recorder}</td>
         `;
         tbody.appendChild(tr);
       });
+    }
+
+    function saveHistoryToStorage() {
+      try {
+        localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(historyRecords));
+      } catch (e) {
+        console.warn('Could not save to localStorage:', e);
+      }
+    }
+
+    function loadHistoryFromStorage() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY_HISTORY);
+        const isProd = localStorage.getItem(STORAGE_KEY_MODE) === 'true';
+        if (stored) {
+          historyRecords = JSON.parse(stored);
+        } else if (!isProd) {
+          historyRecords = [...defaultMockHistory];
+        } else {
+          historyRecords = [];
+        }
+      } catch (e) {
+        historyRecords = [...defaultMockHistory];
+      }
+      renderHistoryTable();
     }
 
     function clearHistoryData() {
       historyRecords = [];
       saveHistoryToStorage();
       renderHistoryTable();
-      showToast('ล้างข้อมูลเรียบร้อยแล้วค่ะ');
+      showToast('ล้างประวัติข้อมูลเรียบร้อยแล้วค่ะ');
     }
 
     function exportToCSV() {
-      if (historyRecords.length === 0) { showToast('ไม่มีข้อมูลสำหรับส่งออก'); return; }
-      let csv = "\uFEFFวันที่,หมวดงาน,จุดตรวจ/รายการ,ค่าที่บันทึก,สถานะ,ผู้บันทึก\n";
-      historyRecords.forEach(r => {
-        csv += `"${r.date}","${r.cat}","${r.point}","${r.value.replace(/"/g, '""')}","${r.status}","${r.recorder}"\n`;
-      });
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url;
-      a.download = `env_records_${new Date().toISOString().split('T')[0]}.csv`;
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      if (historyRecords.length === 0) {
+        showToast('ไม่มีข้อมูลสำหรับส่งออก CSV');
+        return;
+      }
+      const headers = ['วันที่', 'หมวดงาน', 'จุดตรวจ/รายการ', 'ค่าที่บันทึกได้', 'สถานะประเมิน', 'ผู้บันทึก'];
+      const rows = historyRecords.map(r => [
+        `"${r.date}"`,
+        `"${r.cat}"`,
+        `"${r.point.replace(/"/g, '""')}"`,
+        `"${r.value.replace(/"/g, '""')}"`,
+        `"${r.status}"`,
+        `"${r.recorder}"`
+      ]);
+      const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `MaeAi_Env_Records_${new Date().toISOString().split('T')[0]}.csv`;
+      link.click();
       showToast('ส่งออกไฟล์ CSV เรียบร้อยแล้วค่ะ');
     }
 
-    function openScanModal() { document.getElementById('scanModal').classList.remove('hidden'); }
+    function openScanModal() { 
+      document.getElementById('scanModal').classList.remove('hidden'); 
+      initQrModalUrl();
+      renderSelectedQrCode();
+      lucide.createIcons();
+    }
     function closeScanModal() { document.getElementById('scanModal').classList.add('hidden'); }
     function openResetModal() { document.getElementById('resetModal').classList.remove('hidden'); }
     function closeResetModal() { document.getElementById('resetModal').classList.add('hidden'); }
 
+    function switchQrTab(tabKey) {
+      const paneView = document.getElementById('qrPane-view');
+      const paneSim = document.getElementById('qrPane-sim');
+      const btnView = document.getElementById('qrTabBtn-view');
+      const btnSim = document.getElementById('qrTabBtn-sim');
+
+      if (tabKey === 'view') {
+        paneView.classList.remove('hidden');
+        paneSim.classList.add('hidden');
+        btnView.className = "px-3 py-1.5 rounded-xl bg-emerald-700 text-white flex items-center gap-1.5 shadow-xs";
+        btnSim.className = "px-3 py-1.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5";
+      } else {
+        paneView.classList.add('hidden');
+        paneSim.classList.remove('hidden');
+        btnSim.className = "px-3 py-1.5 rounded-xl bg-emerald-700 text-white flex items-center gap-1.5 shadow-xs";
+        btnView.className = "px-3 py-1.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5";
+      }
+      lucide.createIcons();
+    }
+
+    function initQrModalUrl() {
+      const urlInput = document.getElementById('qrCustomUrl');
+      if (urlInput && (!urlInput.value || urlInput.value.trim() === '')) {
+        const currentOrigin = window.location.origin;
+        const currentPath = window.location.pathname;
+        const autoUrl = (currentOrigin && currentOrigin !== "null") ? (currentOrigin + currentPath) : "https://jeerasak-nualdee.github.io/maeai-env/";
+        urlInput.value = autoUrl;
+      }
+    }
+
+    function renderSelectedQrCode() {
+      const pointSelect = document.getElementById('qrPointSelect');
+      const pointCode = pointSelect ? pointSelect.value : 'M-01';
+      const pointText = pointSelect ? pointSelect.options[pointSelect.selectedIndex].text : 'จุดตรวจ';
+      const urlInput = document.getElementById('qrCustomUrl');
+      let baseUrl = urlInput ? urlInput.value.trim() : '';
+      if (!baseUrl) baseUrl = window.location.href.split('?')[0];
+
+      // Remove trailing slash if present
+      if (baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, -1);
+      const targetUrl = `${baseUrl}/?point=${pointCode}`;
+
+      // Update card labels
+      const cardTitle = document.getElementById('qrCardTitle');
+      const cardSubCode = document.getElementById('qrCardSubCode');
+      const fullUrlPreview = document.getElementById('qrFullUrlPreview');
+      const qrImg = document.getElementById('qrGeneratedImg');
+
+      if (cardTitle) cardTitle.innerText = pointText;
+      if (cardSubCode) cardSubCode.innerText = `รหัสประจำจุด: ${pointCode}`;
+      if (fullUrlPreview) fullUrlPreview.innerText = targetUrl;
+
+      // Generate actual scannable QR image via reliable public QR API
+      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=10&data=${encodeURIComponent(targetUrl)}`;
+      if (qrImg) qrImg.src = qrApiUrl;
+    }
+
+    function downloadQrImage() {
+      const qrImg = document.getElementById('qrGeneratedImg');
+      const pointCode = document.getElementById('qrPointSelect')?.value || 'CHECKPOINT';
+      if (!qrImg || !qrImg.src) return;
+
+      const a = document.createElement('a');
+      a.href = qrImg.src;
+      a.download = `QR_${pointCode}_โรงพยาบาลแม่อาย.png`;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast(`ดาวน์โหลดรูปภาพ QR Code "${pointCode}" เรียบร้อยแล้วค่ะ`);
+    }
+
+    function printQrSignage() {
+      const pointText = document.getElementById('qrPointSelect')?.options[document.getElementById('qrPointSelect')?.selectedIndex].text || 'จุดตรวจ';
+      const pointCode = document.getElementById('qrPointSelect')?.value || 'M-01';
+      const qrImgSrc = document.getElementById('qrGeneratedImg')?.src || '';
+      const targetUrl = document.getElementById('qrFullUrlPreview')?.innerText || '';
+
+      const printWin = window.open('', '_blank', 'width=700,height=800');
+      printWin.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>ป้าย QR Code - ${pointCode} โรงพยาบาลแม่อาย</title>
+          <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&display=swap" rel="stylesheet">
+          <style>
+            body { font-family: 'Prompt', sans-serif; margin: 0; padding: 30px; display: flex; justify-content: center; align-items: center; min-height: 90vh; background: #f8fafc; }
+            .signage-card { width: 420px; border: 4px solid #047857; border-top: 10px solid #064e3b; border-radius: 24px; padding: 24px; text-align: center; background: white; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+            .hospital-badge { display: inline-block; background: #047857; color: white; font-weight: 700; font-size: 13px; padding: 4px 14px; border-radius: 20px; margin-bottom: 8px; }
+            h2 { margin: 6px 0 2px 0; color: #0f172a; font-size: 20px; font-weight: 700; }
+            .sub { color: #64748b; font-size: 12px; margin-bottom: 16px; }
+            .qr-box { border: 2px dashed #047857; padding: 12px; border-radius: 16px; display: inline-block; background: #fcfdfd; }
+            .qr-box img { width: 230px; height: 230px; display: block; }
+            .instruct { margin-top: 16px; font-size: 13px; color: #1e293b; font-weight: 600; }
+            .url { font-family: monospace; font-size: 10px; color: #047857; word-break: break-all; margin-top: 4px; }
+            .footer { margin-top: 18px; border-top: 1px solid #e2e8f0; padding-top: 10px; font-size: 11px; color: #64748b; }
+          </style>
+        </head>
+        <body>
+          <div class="signage-card">
+            <div class="hospital-badge">โรงพยาบาลแม่อาย จ.เชียงใหม่</div>
+            <h2>${pointText}</h2>
+            <div class="sub">ระบบบันทึกข้อมูลด้านสิ่งแวดล้อมและอาชีวอนามัย</div>
+            <div class="qr-box">
+              <img src="${qrImgSrc}" alt="QR Code">
+            </div>
+            <div class="instruct">📱 ใช้กล้องโทรศัพท์มือถือ หรือ LINE สแกนเพื่อบันทึกข้อมูล</div>
+            <div class="url">${targetUrl}</div>
+            <div class="footer">กลุ่มงานควบคุมโรคและอนามัยสิ่งแวดล้อม • โทร. ๐๕๓-๔๕๙๐๓๖</div>
+          </div>
+          <script>
+            window.onload = function() { window.print(); }
+          <\/script>
+        </body>
+        </html>
+      `);
+      printWin.document.close();
+    }
+
     function simulateScan(code) {
       closeScanModal();
       if (code === 'M-01') { switchCategory('water'); document.getElementById('waterCurrent').focus(); }
+      else if (code === 'M-02') { 
+        switchCategory('water'); 
+        const sel = document.getElementById('waterMeterSelect');
+        if(sel) { sel.value = 'M-02'; updatePreviousWaterMeter(); }
+        document.getElementById('waterCurrent').focus(); 
+      }
       else if (code === 'WWTS-01') { switchCategory('wwts'); document.getElementById('wwtsPumpToday').focus(); }
       else if (code === 'WASTE-01') { switchCategory('waste'); document.getElementById('wGeneral').focus(); }
       showToast(`สแกนจุด "${code}" สำเร็จค่ะ`);
