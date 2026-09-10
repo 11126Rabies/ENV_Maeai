@@ -68,60 +68,62 @@
 
   <!-- Top Announcement / System Header (Updated to Version 1.1) -->
   <header class="bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-700 text-white shadow-lg border-b border-emerald-900/30 sticky top-0 z-30">
-    <div class="max-w-7xl mx-auto px-4 py-3 sm:py-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div class="max-w-7xl mx-auto px-4 py-3.5 sm:py-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         
-        <!-- Hospital Branding & System Title -->
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-2xl bg-white p-1 backdrop-blur-md border border-white/40 flex items-center justify-center shadow-inner flex-shrink-0 overflow-hidden shadow-emerald-950/20">
+        <!-- Hospital Branding & System Title (Enlarged & More Prominent) -->
+        <div class="flex items-center gap-3.5 sm:gap-4">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white p-1.5 backdrop-blur-md border border-white/50 flex items-center justify-center shadow-md flex-shrink-0 overflow-hidden shadow-emerald-950/25">
             <img id="hospitalLogoImg" src="logo.png" alt="โลโก้โรงพยาบาลแม่อาย" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Seal_of_the_Ministry_of_Public_Health_of_Thailand.svg/240px-Seal_of_the_Ministry_of_Public_Health_of_Thailand.svg.png';">
           </div>
           <div>
-            <div class="flex items-center gap-2">
-              <span class="bg-emerald-500/30 text-emerald-200 text-xs px-2.5 py-0.5 rounded-full border border-emerald-400/30 font-medium">GREEN & CLEAN Hospital</span>
-              <span class="bg-amber-400 text-slate-900 text-xs px-2.5 py-0.5 rounded-full font-bold shadow-sm tracking-wide flex items-center gap-1">
-                <i data-lucide="sparkles" class="w-3 h-3"></i> Version 1.1
+            <div class="flex items-center gap-2.5 flex-wrap">
+              <span class="bg-emerald-500/35 text-emerald-100 text-xs sm:text-sm px-3 py-0.5 rounded-full border border-emerald-400/40 font-semibold shadow-xs">
+                GREEN & CLEAN Hospital
               </span>
-              <span id="liveClock" class="text-xs text-emerald-100/80 font-mono hidden md:inline-block"></span>
+              <span class="bg-amber-400 text-slate-900 text-xs sm:text-sm px-3 py-0.5 rounded-full font-bold shadow-sm tracking-wide flex items-center gap-1">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Version 1.1
+              </span>
+              <span id="liveClock" class="text-xs sm:text-sm text-emerald-100/90 font-mono hidden md:inline-block"></span>
             </div>
-            <h1 class="text-lg sm:text-xl font-bold tracking-tight leading-tight mt-0.5">
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-snug mt-1 text-white drop-shadow-xs">
               ระบบบันทึกข้อมูลด้านสิ่งแวดล้อม โรงพยาบาลแม่อาย
             </h1>
           </div>
         </div>
 
-        <!-- Creator Profile Card -->
-        <div class="bg-emerald-900/40 border border-emerald-500/20 backdrop-blur-sm rounded-xl px-3 py-2 text-xs text-emerald-100 flex items-center gap-3 self-start sm:self-auto">
-          <div class="w-8 h-8 rounded-full bg-emerald-600/60 border border-emerald-400/40 flex items-center justify-center font-bold text-white flex-shrink-0">
+        <!-- Creator Profile Card (Enlarged for Clarity) -->
+        <div class="bg-emerald-900/50 border border-emerald-400/30 backdrop-blur-md rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-emerald-100 flex items-center gap-3.5 self-start sm:self-auto shadow-sm">
+          <div class="w-10 h-10 rounded-full bg-emerald-600/80 border border-emerald-300/50 flex items-center justify-center font-bold text-white text-sm sm:text-base flex-shrink-0 shadow-inner">
             จน
           </div>
-          <div class="leading-tight">
-            <div class="font-semibold text-white">จัดทำโดย: นายจีรศักดิ์ นวลดี</div>
-            <div class="text-emerald-200/90 text-[11px]">นักสาธารณสุขปฏิบัติการ • กลุ่มงานควบคุมโรค</div>
+          <div class="leading-snug">
+            <div class="font-bold text-white text-sm sm:text-base tracking-wide">จัดทำโดย: นายจีรศักดิ์ นวลดี</div>
+            <div class="text-emerald-200 text-xs sm:text-sm font-medium mt-0.5">นักสาธารณสุขปฏิบัติการ • กลุ่มงานควบคุมโรค</div>
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- Quick Action Bar -->
-    <div class="bg-emerald-900/50 border-t border-emerald-600/20 px-4 py-2">
-      <div class="max-w-7xl mx-auto flex items-center justify-between gap-2 overflow-x-auto text-xs sm:text-sm">
-        <div class="flex items-center gap-2 text-emerald-100 flex-shrink-0">
-          <i data-lucide="map-pin" class="w-4 h-4 text-emerald-300"></i>
-          <span>จุดบริการข้อมูลกลาง อนามัยสิ่งแวดล้อมและอาชีวอนามัย</span>
+    <!-- Quick Action Bar (Larger Labels and Buttons) -->
+    <div class="bg-emerald-900/60 border-t border-emerald-600/30 px-4 py-2.5">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 overflow-x-auto text-sm sm:text-base">
+        <div class="flex items-center gap-2 text-emerald-50 flex-shrink-0 font-medium">
+          <i data-lucide="map-pin" class="w-4 h-4 sm:w-5 sm:h-5 text-emerald-300 flex-shrink-0"></i>
+          <span class="text-xs sm:text-sm font-semibold">จุดบริการข้อมูลกลาง อนามัยสิ่งแวดล้อมและอาชีวอนามัย</span>
         </div>
         <div class="flex items-center gap-2 flex-shrink-0">
-          <button onclick="openScanModal()" class="inline-flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold px-3 py-1.5 rounded-lg shadow-sm transition active:scale-95">
-            <i data-lucide="qr-code" class="w-4 h-4"></i>
+          <button onclick="openScanModal()" class="inline-flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold px-3.5 py-2 rounded-xl shadow-sm transition active:scale-95 text-xs sm:text-sm">
+            <i data-lucide="qr-code" class="w-4 h-4 sm:w-4.5 sm:h-4.5"></i>
             <span>สแกน QR หน้างาน</span>
           </button>
-          <button onclick="openResetModal()" class="inline-flex items-center gap-1.5 bg-emerald-700/80 hover:bg-emerald-600 text-white font-medium px-3 py-1.5 rounded-lg border border-emerald-400/40 transition active:scale-95 shadow-sm">
+          <button onclick="openResetModal()" class="inline-flex items-center gap-1.5 bg-emerald-700/90 hover:bg-emerald-600 text-white font-semibold px-3.5 py-2 rounded-xl border border-emerald-400/40 transition active:scale-95 shadow-sm text-xs sm:text-sm">
             <i data-lucide="settings-2" class="w-4 h-4 text-emerald-200"></i>
             <span class="hidden sm:inline">ตั้งค่า / เริ่ม 1 ต.ค. 69</span>
             <span class="sm:hidden">ตั้งค่า</span>
           </button>
-          <button onclick="exportToCSV()" class="inline-flex items-center gap-1 bg-white/10 hover:bg-white/20 text-white px-2.5 py-1.5 rounded-lg border border-white/20 transition">
+          <button onclick="exportToCSV()" class="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 text-white font-medium px-3 py-2 rounded-xl border border-white/25 transition text-xs sm:text-sm">
             <i data-lucide="download" class="w-4 h-4"></i>
             <span class="hidden sm:inline">ส่งออก CSV</span>
           </button>
